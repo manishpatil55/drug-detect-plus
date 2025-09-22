@@ -1,32 +1,114 @@
-# Drug Detect+ (student prototype)
+# 💊 Drug Detect+: AI-Powered Fake Medicine Detection
 
-Drug Detect+ is a software-only prototype for identifying fake and substandard medicines using spectral data (synthetic / public Raman-like or NIR-like spectra).
+> 🚀 An AI-powered system to identify **fake** and **substandard** medicines using **spectral data**.  
+> Built with 💻 Python + 🤖 Machine Learning + 📊 Streamlit.  
 
-## Features
-- Synthetic dataset generator (data/spectra_labeled.csv)
-- Training pipeline (RandomForest baseline)
-- SHAP explainability images
-- Streamlit demo for local predictions and spectral overlays
+---
 
-## Quick start (Mac)
-1. Create venv and install:
+## 🌟 Overview
+Counterfeit & substandard drugs are a huge problem worldwide.  
+This project, **Drug Detect+**, is a **proof-of-concept prototype** that uses spectral fingerprints of medicines to classify them as:
+
+- ✅ Genuine  
+- ⚠️ Substandard  
+- ❌ Counterfeit  
+
+We **simulate spectral data** in this project (because real lab data requires spectrometers 🧪). But the **ML pipeline, preprocessing, and UI are real** and can directly work with real-world data when available.
+
+---
+
+## 🛠️ Tech Stack
+- **Language**: Python 3.10+  
+- **Libraries**:  
+  - `numpy`, `pandas` → data handling  
+  - `scikit-learn` → ML (RandomForest)  
+  - `shap` → explainable AI (why the model decided something)  
+  - `matplotlib` → plots & graphs  
+  - `streamlit` → interactive UI  
+
+---
+
+## 📂 Project Structure
+
+Drug-Detect-Plus/
+│
+├── data/ # (optional) folder to keep spectra CSVs
+├── models/ # trained models saved here
+├── src/
+│ ├── data_prep.py # simulate spectral dataset
+│ ├── train_basic.py # train ML model on spectral data
+│ └── app_streamlit.py # Streamlit web app (UI)
+│
+├── requirements.txt # dependencies
+└── README.md # this file
+
+
+---
+
+## 🚀 How to Run
+### 1. Clone repo & set up env
+```bash
+git clone https://github.com/your-username/drug-detect-plus.git
+cd drug-detect-plus
+
+# create virtual env
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Mac/Linux
+# .venv\Scripts\activate    # Windows
+
+```
+
+# install deps
 pip install -r requirements.txt
 
-2. Generate data:
+### 2. Generate dummy dataset
 python src/data_prep.py
 
-3. Train:
+This creates a fake spectral dataset (data/spectral_dataset.csv) with 3 classes: genuine, substandard, counterfeit.
+
+### 3. Train model
 python src/train_basic.py
 
-4. Run SHAP explain:
-python src/explain_shap.py
+Model gets trained & saved at models/spectral_model.pkl.
 
-5. Run demo:
-streamlit run app_streamlit.py
+### 4. Run Streamlit app
+streamlit run src/app_streamlit.py
 
+Go to http://localhost:8501 in your browser → upload a sample spectrum CSV or use the demo button.
 
-## Notes
-- This prototype uses synthetic spectra by default. You can replace with real spectra by placing per-spectrum CSVs in `data/raw/` (format to be harmonized).
-- This is NOT certified to detect real-world counterfeit medicines. It's a research/learning prototype.
+## 🎮 Features
+Generate synthetic spectral fingerprints of medicines.
+Train an ML model (RandomForest) to detect genuine vs fake vs substandard.
+Streamlit Dashboard:
+Upload spectra CSVs
+Instant classification with confidence score
+Probability visualization
+SHAP plots → explain why the model decided that way
+
+## 📸 Demo Preview
+(replace these with your own screenshots)
+
+## 🎓 For College Project
+
+## 🔬 Even though dataset is simulated, the ML pipeline is research-grade.
+
+## 🧪 If real spectral data is available, this same pipeline can be retrained on it.
+
+## ✅ Perfect as a final year BTech / hackathon project.
+
+## 📌 Limitations
+Current version uses synthetic spectra (not real-world lab data).
+Accuracy is good on demo data but real deployment requires spectrometer datasets.
+Not a certified medical tool — just a proof-of-concept.
+
+## 📜 License
+MIT License — feel free to fork & build on it.
+
+## 💡 Future Ideas
+Plug in real Raman / NIR spectra from pharma labs.
+Deploy as a mobile app with cloud backend.
+Integrate with blockchain for supply chain verification.
+Add an image-based visual scanner (packaging/photos).
+
+## ✨ Credits
+Developed by Manish Kakulde 🧑‍💻
