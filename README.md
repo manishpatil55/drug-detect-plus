@@ -29,6 +29,7 @@ We **simulate spectral data** in this project (because real lab data requires sp
 ---
 
 ## 📂 Project Structure
+```bash
 
 Drug-Detect-Plus/
 │
@@ -41,7 +42,7 @@ Drug-Detect-Plus/
 │
 ├── requirements.txt # dependencies
 └── README.md # this file
-
+```
 
 ---
 
@@ -59,20 +60,28 @@ source .venv/bin/activate   # Mac/Linux
 ```
 
 # install deps
+```bash
 pip install -r requirements.txt
+```
 
 ### 2. Generate dummy dataset
+```bash
 python src/data_prep.py
+```
 
 This creates a fake spectral dataset (data/spectral_dataset.csv) with 3 classes: genuine, substandard, counterfeit.
 
 ### 3. Train model
+```bash
 python src/train_basic.py
+```
 
 Model gets trained & saved at models/spectral_model.pkl.
 
 ### 4. Run Streamlit app
+```bash
 streamlit run src/app_streamlit.py
+```
 
 Go to http://localhost:8501 in your browser → upload a sample spectrum CSV or use the demo button.
 
