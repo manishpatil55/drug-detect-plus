@@ -95,7 +95,7 @@ Probability visualization
 SHAP plots → explain why the model decided that way
 
 ## 📸 Demo Preview
-(replace these with your own screenshots)
+![UI Demo](assets/ui_demo.png)
 
 ## 🎓 For College Project
 
