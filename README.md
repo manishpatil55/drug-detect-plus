@@ -94,7 +94,7 @@ Instant classification with confidence score
 Probability visualization
 SHAP plots → explain why the model decided that way
 
-## 📸 Demo Preview
+## 📸 Demo Preview 
 ![UI Demo](assets/ui_demo.png)
 
 ## 🎓 For College Project
