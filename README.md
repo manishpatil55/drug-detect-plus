@@ -41,7 +41,6 @@ cd drug-detect-plus
 python3 -m venv .venv
 source .venv/bin/activate   # (Mac/Linux)
 ```
-# OR
 ```bash
 .venv\Scripts\activate      # (Windows)
 ```
@@ -73,15 +72,15 @@ http://localhost:5000
 ---
 
 🧠 How It Works
-	1.	You upload a photo of a medicine 📸
-	2.	The backend sends the image to Gemini AI via your API key 🤖
-	3.	Gemini analyzes and identifies the medicine 💊
-	4.	The app shows:
-	•	Medicine Name
-	•	Uses and Composition
-	•	Dosage Info
-	•	Side Effects (if applicable)
-	•	External link suggestions for ordering
+   - You upload a photo of a medicine 📸
+	- The backend sends the image to Gemini AI via your API key 🤖
+	- Gemini analyzes and identifies the medicine 💊
+	- The app shows:
+   - Medicine Name
+   - Uses and Composition
+   - Dosage Info
+   - Side Effects (if applicable)
+   - External link suggestions for ordering
 
 ---
 
@@ -93,19 +92,13 @@ Type-safe, scroll-aware, and built with minimal JS for performance.
 ---
 
 🧑‍💻 Developer Notes
-	•	You can customize the AI prompt in app.py to change how detailed responses should be.
-	•	The entire app is front-end + Flask — no database required.
-	•	The localStorage stores preview image data for smooth reload experience.
-	•	Make sure .env is properly loaded before running the app.
+   - You can customize the AI prompt in app.py to change how detailed responses should be.
+	- The entire app is front-end + Flask — no database required.
+	- The localStorage stores preview image data for smooth reload experience.
+	- Make sure .env is properly loaded before running the app.
 
 ---
 
-☕ Credits
-
-Built with ❤️ by Manish Patil
-Made for modern web — clean, aesthetic, and AI-driven 💫
-
----
 
 📜 License
 
