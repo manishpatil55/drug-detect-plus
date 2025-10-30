@@ -71,7 +71,7 @@ http://localhost:5000
 
 ---
 
-🧠 How It Works
+## 🧠 How It Works
    - You upload a photo of a medicine 📸
 	- The backend sends the image to Gemini AI via your API key 🤖
 	- Gemini analyzes and identifies the medicine 💊
@@ -84,7 +84,9 @@ http://localhost:5000
 
 ---
 
-🪩 Demo Preview
+## 🪩 Demo Preview
+
+![App Preview](public/drug-detect-ai.jpeg)
 
 ✨ A clean, glowing glassmorphic UI with smooth animations and orbs in the background.
 Type-safe, scroll-aware, and built with minimal JS for performance.
