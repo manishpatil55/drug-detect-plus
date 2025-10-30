@@ -96,7 +96,7 @@ http://localhost:5000
 
 ## 🪩 Demo Preview
 
-![App Preview](public/drug-detect-ai.jpeg)
+![App Preview](public/drug-detect-preview.png)
 
 ✨ A clean, glowing glassmorphic UI with smooth animations and orbs in the background.
 Type-safe, scroll-aware, and built with minimal JS for performance.
