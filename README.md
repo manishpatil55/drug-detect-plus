@@ -1,3 +1,13 @@
+<a href="https://drug-detect-plus.vercel.app/">
+  <img 
+    src="public/drug-detect-ai.jpeg"
+    alt="Drug Detect++ Preview"
+    width="100%"
+    style="border-radius: 12px; box-shadow: 0 0 25px rgba(0, 200, 200, 0.2);"
+  />
+</a>
+
+
 # 💊 Drug Detect AI — Smart Medicine Image Analyzer
 
 > AI-powered tool that identifies medicines just by their image.  
