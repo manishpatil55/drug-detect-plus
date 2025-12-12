@@ -43,7 +43,8 @@ def index():
         try:
             # 1. Handle Multiple Files
             uploaded_files = request.files.getlist('file')
-            language = request.form.get('language', 'English')
+            # Default to English for initial scan
+            language = "English"
             
             valid_images = []
             
@@ -71,9 +72,9 @@ def index():
             # If no errors and we have images, proceed to AI
             if not error_message and valid_images:
                 
-                # Dynamic Prompt Construction
+                # Dynamic Prompt Construction (Always English Initial)
                 prompt_parts = [
-                    f"Analyze the uploaded medicine image(s). Provide response in **{language}** language.",
+                    "Analyze the uploaded medicine image(s). Provide response in **English**.",
                     "1. Identify the medicine(s) name, usage, dosage, and side effects.",
                     "2. **Critical**: If multiple different medicines are visible, check for **DRUG INTERACTIONS** between them. Can they be taken together?",
                     "3. **Affiliate/Buying**: For each identified medicine, generate a 'Buy Online' section.",
@@ -103,6 +104,33 @@ def index():
                 error_message = f"Error: {str(e)}"
 
     return render_template('index.html', response_text=response_text, error=error_message)
+
+@app.route('/translate', methods=['POST'])
+@limiter.limit("20 per minute") # Higher limit for translations
+def translate_text():
+    try:
+        data = request.get_json()
+        text_to_translate = data.get('text')
+        target_language = data.get('target_language')
+        
+        if not text_to_translate or not target_language:
+             return {"error": "Missing text or target_language"}, 400
+
+        # Translation Prompt
+        prompt = f"Translate the following medical text to **{target_language}**. Preserve all Markdown formatting (bold, list, links) exactly. Do not add any new content, just translate.\n\nText:\n{text_to_translate}"
+        
+        client = get_gemini_client()
+        model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+        
+        response = client.models.generate_content(
+             model=model_name,
+             contents=[prompt]
+        )
+        
+        return {"translated_text": response.text}
+
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 # Handle Rate Limit Errors specifically to show nice message
 @app.errorhandler(429)

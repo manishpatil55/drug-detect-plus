@@ -282,13 +282,6 @@
     }
 
     /* Language Button (Styled like Copy Button) */
-    .lang-wrapper {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 10;
-    }
-
     .lang-select {
       appearance: none;
       background: rgba(255, 255, 255, 0.05);
@@ -490,9 +483,7 @@
     }
 
     .copy-btn {
-      position: absolute;
-      right: 12px;
-      top: 12px;
+      /* Remove absolute positioning, managed by flex container now */
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -504,6 +495,7 @@
       font-size: 13px;
       cursor: pointer;
       font-weight: 700;
+      position: static;
     }
 
     .copy-icon {
@@ -603,23 +595,7 @@
           <div class="upload-title">Click or drag to upload</div>
           <div class="upload-sub">JPEG, PNG — clear photo of medicine</div>
 
-          <!-- Language Selector Top Right -->
-          <div class="lang-wrapper">
-            <select name="language" id="langSelect" class="lang-select" title="Select Output Language">
-              <option value="English">English</option>
-              <option value="Hindi">Hindi (हिंदी)</option>
-              <option value="Spanish">Spanish (Español)</option>
-              <option value="French">French (Français)</option>
-              <option value="German">German (Deutsch)</option>
-              <option value="Italian">Italian (Italiano)</option>
-              <option value="Chinese">Chinese (中文)</option>
-              <option value="Japanese">Japanese (日本語)</option>
-              <option value="Korean">Korean (한국어)</option>
-              <option value="Portuguese">Portuguese (Português)</option>
-              <option value="Russian">Russian (Русский)</option>
-              <option value="Arabic">Arabic (العربية)</option>
-            </select>
-          </div>
+          <!-- Language Selector Removed from Upload Plate -->
 
           <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
 
@@ -636,13 +612,27 @@
 
           <div class="response-card" id="responseCard" style="display:none;">
             <div class="response-title">AI Response</div>
-            <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
-              <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
-              </svg>
-              Copy
-            </button>
+            <div style="position: absolute; right: 12px; top: 12px; display: flex; gap: 8px;">
+              <!-- Language Selector (Post-Response) -->
+              <select id="langSelect" class="lang-select" style="padding-left: 32px;" title="Translate Result">
+                <option value="English" selected>English 🇺🇸</option>
+                <option value="Hindi">Hindi (In) 🇮🇳</option>
+                <option value="Spanish">Spanish 🇪🇸</option>
+                <option value="French">French 🇫🇷</option>
+                <option value="German">German 🇩🇪</option>
+                <option value="Chinese">Chinese 🇨🇳</option>
+                <option value="Russian">Russian 🇷🇺</option>
+                <option value="Arabic">Arabic 🇸🇦</option>
+              </select>
+
+              <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result" style="position: static;">
+                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
+                </svg>
+                Copy
+              </button>
+            </div>
             <div id="responseBody" class="response-body" tabindex="0">{{ response_text }}</div>
           </div>
         </div>
@@ -671,6 +661,7 @@
     const fileInput = document.getElementById('fileInput'); // Ensure fileInput is defined
     const uploadPlate = document.getElementById('uploadPlate'); // Ensure uploadPlate is defined
     const clearBtn = document.getElementById('clearBtn'); // Ensure clearBtn is defined
+    const responseBody = document.getElementById('responseBody'); // Ensure responseBody is defined
 
 
     function renderPreviews(files) {
@@ -737,6 +728,62 @@
 
     // NOTE: Removed localStorage logic for simplicity with multi-files
     // (Persisting multiple large blobs in localStorage is risky/complex)
+
+    // --- TRANSLATION LOGIC ---
+    const langSelect = document.getElementById('langSelect');
+
+    if (langSelect) {
+      langSelect.addEventListener('change', async () => {
+        const targetLang = langSelect.value;
+        // Don't translate if going back to English (unless original was not English, but simple logic for now)
+        // Ideally we cache the original English text.
+
+        const currentText = responseBody.innerText;
+        if (!currentText || currentText.length < 5) return;
+
+        // Show Loading indicator
+        const originalHTML = responseBody.innerHTML;
+        responseBody.innerHTML = '<div style="opacity:0.6; padding:20px;">Translating to ' + targetLang + '... <div class="spinner" style="width:24px; height:24px; border-width:3px; display:inline-block; vertical-align:middle; margin-left:10px;"></div></div>';
+
+        try {
+          const res = await fetch('/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: currentText, target_language: targetLang })
+          });
+
+          const data = await res.json();
+
+          if (data.translated_text) {
+            responseBody.innerHTML = marked.parse(data.translated_text);
+          } else {
+            responseBody.innerHTML = originalHTML; // Revert on failure
+            alert('Translation failed: ' + (data.error || 'Unknown error'));
+          }
+        } catch (err) {
+          responseBody.innerHTML = originalHTML; // Revert
+          console.error(err);
+          alert('Network error during translation.');
+        }
+      });
+    }
+
+    // copy button (safe guards)
+    const copyBtn = document.getElementById('copyBtn');
+    if (copyBtn && responseBody) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(responseBody.innerText);
+          const prev = copyBtn.innerHTML;
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => { copyBtn.innerHTML = prev; }, 1200);
+        } catch (err) {
+          console.warn('clipboard failed', err);
+          copyBtn.textContent = 'Failed';
+          setTimeout(() => { copyBtn.innerHTML = 'Copy'; }, 1200);
+        }
+      });
+    }
   </script>
 </body>
 
