@@ -726,11 +726,63 @@
       responseCard.style.display = 'none';
     });
 
-    // NOTE: Removed localStorage logic for simplicity with multi-files
-    // (Persisting multiple large blobs in localStorage is risky/complex)
+    // --- CRITICAL FIX: SHOW OVERLAY ON CLICK ---
+    const analyzeBtn = document.getElementById('analyzeBtn');
 
-    // --- TRANSLATION LOGIC ---
-    const langSelect = document.getElementById('langSelect');
+    // Force overlay display immediately when button is clicked (if files exist)
+    analyzeBtn.addEventListener('click', (e) => {
+      if (fileInput.files.length > 0) {
+        overlay.classList.add('show');
+        // Allow form to submit naturally
+      } else {
+        // If no files, let the form validation (or server check) handle it, 
+        // but maybe shake the card or alert? For now, standard behavior.
+      }
+    });
+
+    // restore preview + show response if server returned text (prioritize server text)
+    function initFromSaved() {
+      const serverText = responseBody && responseBody.innerText && responseBody.innerText.trim().length > 0;
+
+      // If server returned text, FORCE show the response card and stack area
+      if (serverText) {
+        stackArea.style.display = 'flex';
+        responseCard.style.display = 'flex';
+
+        // Try to restore preview from localStorage, but don't fail if missing
+        try {
+          const saved = localStorage.getItem(LS_KEY);
+          if (saved) showPreviewFromDataURL(saved, true);
+        } catch (e) { }
+
+        // Render Markdown
+        if (typeof marked !== 'undefined') {
+          const raw = responseBody.innerText;
+          responseBody.innerHTML = marked.parse(raw);
+        }
+
+        // Scroll to result slightly delayed to ensure rendering
+        setTimeout(() => {
+          try { responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
+        }, 300);
+
+      } else {
+        // No server text - standard init
+        let saved = null;
+        try { saved = localStorage.getItem(LS_KEY); } catch (e) { }
+
+        if (saved) {
+          showPreviewFromDataURL(saved, true);
+        } else {
+          // Clean state
+          hidePreview();
+          stackArea.style.display = 'none';
+        }
+      }
+
+      // ALWAYS hide overlay on load
+      overlay.classList.remove('show');
+    }
 
     if (langSelect) {
       langSelect.addEventListener('change', async () => {
