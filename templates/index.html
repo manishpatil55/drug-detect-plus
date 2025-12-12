@@ -554,6 +554,10 @@
     <div class="spinner" role="status" aria-hidden="true"></div>
   </div>
 
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
   <script>
     // Keep scroll restoration manual so we control where to scroll
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -605,6 +609,14 @@
 
       // ensure overlay hidden
       overlay.classList.remove('show');
+
+      // Render markdown if Present
+      if (responseBody && responseBody.textContent.trim().length > 0 && typeof marked !== 'undefined') {
+        const raw = responseBody.textContent;
+        // Simple security check: if it looks like markdown, render it.
+        // For production, use DOMPurify. Here we trust the API.
+        responseBody.innerHTML = marked.parse(raw);
+      }
     }
 
     // On DOM ready
