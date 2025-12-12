@@ -325,68 +325,6 @@
       background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Aggressive Google Translate Widget Hiding */
-    .goog-te-banner-frame.skiptranslate,
-    .goog-te-balloon-frame,
-    #goog-gt-tt,
-    .goog-te-usage-window {
-      display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      width: 0 !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-
-    body {
-      top: 0px !important;
-      position: static !important;
-    }
-
-    /* Hide Tooltips and Highlights */
-    .goog-tooltip {
-      display: none !important;
-    }
-
-    .goog-tooltip:hover {
-      display: none !important;
-    }
-
-    .goog-text-highlight {
-      background-color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-
-    /* Hide gadget specific elements */
-    .goog-te-gadget-simple {
-      background-color: transparent !important;
-      border: none !important;
-      padding: 0 !important;
-    }
-
-    .goog-te-gadget-icon {
-      display: none !important;
-    }
-
-    .goog-logo-link {
-      display: none !important;
-    }
-
-    .goog-te-gadget {
-      color: transparent !important;
-      height: 0 !important;
-      overflow: hidden;
-    }
-
-    /* Ensure the wrapper also has 0 height/width so it doesn't take space */
-    #google_translate_element {
-      height: 0 !important;
-      width: 0 !important;
-      overflow: hidden;
-      position: absolute;
-    }
-
     .analyze-row {
       display: flex;
       gap: 12px;
@@ -668,14 +606,14 @@
   </div>
 
   <div class="stage" role="main" id="stage">
-    <header class="notranslate">
+    <header>
       <h1>Drug Detect AI</h1>
       <p class="lead">Smart Medicine Image Analyzer</p>
     </header>
 
     <div class="card" role="region" aria-label="Upload area">
       <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate>
-        <div class="upload-plate notranslate" id="uploadPlate" aria-hidden="false">
+        <div class="upload-plate" id="uploadPlate" aria-hidden="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M12 16V8M12 8l-3 3M12 8l3 3M21 15v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
@@ -697,31 +635,23 @@
           </div>
 
           <div class="response-card" id="responseCard" style="display:none;">
-            <div class="response-title notranslate">AI Response
-              <div id="google_translate_element"
-                style="display:inline-block; margin-left:10px; opacity:0; width:1px; height:1px; overflow:hidden;">
-              </div>
+            <div class="response-title">AI Response
             </div>
 
             <!-- Translation Dropdown next to Copy -->
-            <div class="lang-wrapper notranslate">
+            <div class="lang-wrapper">
               <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
-                <option value="en">English (Default)</option>
-                <option value="hi">Hindi</option>
-                <option value="es">Spanish</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-                <option value="zh-CN">Chinese</option>
-                <option value="ja">Japanese</option>
-                <option value="ar">Arabic</option>
-                <option value="ru">Russian</option>
-                <option value="pt">Portuguese</option>
-                <option value="it">Italian</option>
-                <option value="ko">Korean</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi (हिंदी)</option>
+                <option value="Spanish">Spanish (Español)</option>
+                <option value="French">French (Français)</option>
+                <option value="German">German (Deutsch)</option>
+                <option value="Chinese">Chinese (中文)</option>
+                <option value="Arabic">Arabic (العربية)</option>
               </select>
             </div>
 
-            <button class="copy-btn notranslate" id="copyBtn" type="button" aria-label="Copy result">
+            <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
               <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
@@ -734,33 +664,55 @@
       </form>
     </div>
 
-    <footer class="notranslate" style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
+    <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
   </div>
 
   <div class="overlay" id="overlay" aria-hidden="true">
     <div class="spinner" role="status" aria-hidden="true"></div>
   </div>
 
-  <!-- Google Translate Script -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript"
-    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
   <!-- Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 
   <script>
-    // --- CUSTOM TRANSLATION LOGIC ---
-    function triggerTranslation(langCode) {
-      const combo = document.querySelector('.goog-te-combo');
-      if (combo) {
-        combo.value = langCode;
-        combo.dispatchEvent(new Event('change'));
+    // --- SERVER-SIDE AI TRANSLATION LOGIC ---
+    let originalText = ""; // Store original English text
+
+    async function triggerTranslation(targetLang) {
+      if (!originalText) {
+        const body = document.getElementById('responseBody');
+        originalText = body.innerText; // Capture text on first translate
+      }
+
+      if (targetLang === 'English') {
+        document.getElementById('responseBody').innerHTML = marked.parse(originalText);
+        return;
+      }
+
+      // Show loading state
+      document.getElementById('responseBody').innerHTML = '<div style="text-align:center; padding: 20px; color: #aaffff;">Translating with AI... <br>(This may take a few seconds)</div>';
+
+      try {
+        const response = await fetch('/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: originalText, language: targetLang })
+        });
+
+        const data = await response.json();
+
+        if (data.translated_text) {
+          document.getElementById('responseBody').innerHTML = marked.parse(data.translated_text);
+        } else {
+          alert("Translation failed: " + (data.error || "Unknown error"));
+          document.getElementById('responseBody').innerHTML = marked.parse(originalText); // Revert
+        }
+
+      } catch (e) {
+        console.error(e);
+        alert("Translation failed. Please try again.");
+        document.getElementById('responseBody').innerHTML = marked.parse(originalText); // Revert
       }
     }
 

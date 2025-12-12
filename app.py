@@ -2,7 +2,7 @@ import os
 from PIL import Image
 from dotenv import load_dotenv
 from google import genai
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 # Security Imports
 from flask_limiter import Limiter
@@ -73,12 +73,16 @@ def index():
                 # Dynamic Prompt Construction
                 prompt_parts = [
                     "Analyze the uploaded medicine image(s).",
-                    "1. Identify the medicine(s) name, usage, dosage, and side effects.",
-                    "2. **Critical**: If multiple different medicines are visible, check for **DRUG INTERACTIONS** between them. Can they be taken together?",
-                    "3. **Affiliate/Buying**: For each identified medicine, generate a 'Buy Online' section.",
+                    "### 💊 Medicine Analysis",
+                    "Identify the medicine(s) name, usage, dosage, and side effects.",
+                    "### ⚠️ Drug Interactions",
+                    "**Critical**: If multiple different medicines are visible, check if they can be taken together. Explain any risks.",
+                    "### 🛒 WHERE TO BUY",
+                    "For each identified medicine, generate a 'Buy Online' section.",
                     "   - Provide search links to: **1mg**, **Apollo Pharmacy**, **Netmeds**, **Amazon**.",
                     "   - Format: `[Buy on 1mg](https://www.1mg.com/search/all?name=<Medicine Name>)`",
-                    "4. Disclaimer: 'Consult a doctor before use.'"
+                    "### ℹ️ Disclaimer",
+                    "'Consult a doctor before use.'"
                 ]
                 
                 full_prompt = "\n".join(prompt_parts)
@@ -102,6 +106,33 @@ def index():
                 error_message = f"Error: {str(e)}"
 
     return render_template('index.html', response_text=response_text, error=error_message)
+
+@app.route('/translate', methods=['POST'])
+@limiter.limit("20 per minute")
+def translate_text():
+    try:
+        data = request.json
+        text = data.get('text')
+        target_lang = data.get('language')
+        
+        if not text or not target_lang:
+            return jsonify({'error': 'Invalid request'}), 400
+
+        # Translation Prompt
+        model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+        client = get_gemini_client()
+        
+        prompt = f"Translate the following medical analysis to {target_lang}. Maintain all Markdown formatting (bold, headers, links) exactly as is. Output only the translated text.\n\n{text}"
+        
+        response = client.models.generate_content(
+            model=model_name,
+            contents=[prompt]
+        )
+        
+        return jsonify({'translated_text': response.text})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # Handle Rate Limit Errors specifically to show nice message
 @app.errorhandler(429)
