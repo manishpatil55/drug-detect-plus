@@ -622,14 +622,14 @@
   </div>
 
   <div class="stage" role="main" id="stage">
-    <header>
+    <header class="notranslate">
       <h1>Drug Detect AI</h1>
       <p class="lead">Smart Medicine Image Analyzer</p>
     </header>
 
     <div class="card" role="region" aria-label="Upload area">
       <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate>
-        <div class="upload-plate" id="uploadPlate" aria-hidden="false">
+        <div class="upload-plate notranslate" id="uploadPlate" aria-hidden="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M12 16V8M12 8l-3 3M12 8l3 3M21 15v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
@@ -651,14 +651,14 @@
           </div>
 
           <div class="response-card" id="responseCard" style="display:none;">
-            <div class="response-title">AI Response
+            <div class="response-title notranslate">AI Response
               <div id="google_translate_element"
                 style="display:inline-block; margin-left:10px; opacity:0; width:1px; height:1px; overflow:hidden;">
               </div>
             </div>
 
             <!-- Translation Dropdown next to Copy -->
-            <div class="lang-wrapper">
+            <div class="lang-wrapper notranslate">
               <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
                 <option value="en">English (Default)</option>
                 <option value="hi">Hindi</option>
@@ -675,7 +675,7 @@
               </select>
             </div>
 
-            <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
+            <button class="copy-btn notranslate" id="copyBtn" type="button" aria-label="Copy result">
               <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
@@ -688,7 +688,7 @@
       </form>
     </div>
 
-    <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
+    <footer class="notranslate" style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
   </div>
 
   <div class="overlay" id="overlay" aria-hidden="true">
