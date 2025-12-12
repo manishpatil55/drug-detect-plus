@@ -39,9 +39,8 @@ def index():
                 )
 
                 # Initialize client and generate content
-                # Uses the model from environment or defaults to gemini-2.0-flash
-                # Confirmed available model from diagnostic: gemini-2.0-flash
-                model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+                # Uses the model from environment or defaults to the verified working model
+                model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
                 client = get_gemini_client()
                 
                 # New SDK syntax
