@@ -68,12 +68,7 @@
       color: #e8fbfb;
       box-sizing: border-box;
 
-      /* tuned background to match the reference image: strong center soft vignette */
-      background:
-        radial-gradient(800px 500px at 50% 12%, rgba(6, 160, 158, 0.18), transparent 9%),
-        radial-gradient(900px 700px at 30% 40%, rgba(12, 200, 200, 0.08), transparent 12%),
-        radial-gradient(900px 700px at 70% 80%, rgba(5, 90, 90, 0.04), transparent 12%),
-        linear-gradient(180deg, var(--deep-outer) 0%, var(--deep-mid) 45%, var(--deep-center) 100%);
+      /* background moved to .bg-fixed */
     }
 
     /* === Background Enhancement === */
@@ -634,6 +629,7 @@
 </head>
 
 <body>
+  <div class="bg-fixed"></div> <!-- New Fixed Background -->
   <div class="bg-subtle" aria-hidden="true">
     <div class="orb orb-a"></div>
     <div class="orb orb-b"></div>
