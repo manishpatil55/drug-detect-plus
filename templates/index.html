@@ -792,7 +792,59 @@
     });
 
     // NOTE: Removed localStorage logic for simplicity with multi-files
-    // (Persisting multiple large blobs in localStorage is risky/complex)
+
+    // --- RESTORE RESPONSE DISPLAY LOGIC ---
+    window.addEventListener('load', () => {
+      const responseBody = document.getElementById('responseBody');
+      const responseCard = document.getElementById('responseCard');
+      const stackArea = document.getElementById('stackArea');
+      const overlay = document.getElementById('overlay');
+      const mainForm = document.getElementById('mainForm');
+      const copyBtn = document.getElementById('copyBtn');
+
+      // Hide overlay on load
+      overlay.classList.remove('show');
+
+      // Check if server returned text
+      if (responseBody && responseBody.textContent.trim().length > 0) {
+
+        // 1. Show the Card
+        responseCard.style.display = 'flex';
+        stackArea.style.display = 'flex';
+
+        // 2. Render Markdown
+        if (typeof marked !== 'undefined') {
+          const raw = responseBody.textContent;
+          responseBody.innerHTML = marked.parse(raw);
+        }
+
+        // 3. Scroll to result
+        setTimeout(() => {
+          try { responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
+        }, 300);
+      }
+
+      // Show overlay on Submit
+      mainForm.addEventListener('submit', () => {
+        if (fileInput.files.length > 0) {
+          overlay.classList.add('show');
+        }
+      });
+
+      // Copy Logic
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(responseBody.innerText); // Use innerText to get clean text
+            const prev = copyBtn.innerHTML;
+            copyBtn.textContent = 'Copied';
+            setTimeout(() => { copyBtn.innerHTML = prev; }, 1200);
+          } catch (err) {
+            console.warn('clipboard failed', err);
+          }
+        });
+      }
+    });
   </script>
 </body>
 
