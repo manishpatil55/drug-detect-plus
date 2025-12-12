@@ -563,21 +563,27 @@
           <div class="upload-title">Click or drag to upload</div>
           <div class="upload-sub">JPEG, PNG — clear photo of medicine</div>
 
-          <input id="fileInput" name="file" type="file" accept="image/*" style="display:none;">
+          <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
+
+          <div class="controls-row" style="margin-bottom: 12px; display: flex; gap: 10px; justify-content: center;">
+            <select name="language" id="langSelect"
+              style="padding: 8px 12px; border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+              <option value="English">English</option>
+              <option value="Hindi">Hindi (हिंदी)</option>
+              <option value="Spanish">Spanish (Español)</option>
+              <option value="French">French (Français)</option>
+            </select>
+          </div>
 
           <div class="analyze-row">
-            <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image</button>
-            <button type="button" class="clear-btn" id="clearBtn">Clear Preview</button>
+            <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image(s)</button>
+            <button type="button" class="clear-btn" id="clearBtn">Clear</button>
           </div>
         </div>
 
         <div class="stack" id="stackArea">
-          <div class="preview-card" id="previewCard" style="display:none;">
-            <img id="previewThumb" class="preview-thumb" src="" alt="preview" />
-            <div class="preview-meta">
-              <div class="name" id="metaName">Filename.jpg</div>
-              <div class="size" id="metaSize">24 KB</div>
-            </div>
+          <div id="previewContainer" style="display:none; flex-direction: column; gap: 10px;">
+            <!-- Dynamic User Previews will be injected here via JS -->
           </div>
 
           <div class="response-card" id="responseCard" style="display:none;">
@@ -610,166 +616,63 @@
     // Keep scroll restoration manual so we control where to scroll
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    const LS_KEY = 'drug_detect_preview_final_v2';
-    const fileInput = document.getElementById('fileInput');
-    const previewCard = document.getElementById('previewCard');
-    const previewThumb = document.getElementById('previewThumb');
-    const metaName = document.getElementById('metaName');
-    const metaSize = document.getElementById('metaSize');
-    const responseCard = document.getElementById('responseCard');
-    const responseBody = document.getElementById('responseBody');
-    const overlay = document.getElementById('overlay');
-    const clearBtn = document.getElementById('clearBtn');
-    const mainForm = document.getElementById('mainForm');
-    const copyBtn = document.getElementById('copyBtn');
-    const uploadPlate = document.getElementById('uploadPlate');
-    const stackArea = document.getElementById('stackArea');
+    // --- MULTI-FILE PREVIEW LOGIC ---
+    const previewContainer = document.getElementById('previewContainer');
 
-    // make plate clickable except when clicking buttons
-    uploadPlate.addEventListener('click', (e) => {
-      if (e.target.closest('.analyze-btn') || e.target.closest('.clear-btn') || e.target.closest('button')) return;
-      fileInput.click();
-    });
-
-    // restore preview + show response if server returned text and preview exists
-    function initFromSaved() {
-      let saved = null;
-      try { saved = localStorage.getItem(LS_KEY); } catch (e) { console.warn('localStorage read failed', e); }
-      const serverText = responseBody && responseBody.textContent && responseBody.textContent.trim().length > 0;
-
-      if (saved) {
-        showPreviewFromDataURL(saved, true);
-        // show server text only if both preview and server returned text
-        if (serverText) {
-          responseCard.style.display = 'block';
-          // focus the response body (prevent scroll) then scroll into view
-          requestAnimationFrame(() => {
-            try { responseBody.focus({ preventScroll: true }); } catch { }
-            setTimeout(() => {
-              try { responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
-            }, 160);
-          });
-        }
-      } else {
-        hidePreview();
-        responseCard.style.display = 'none';
+    function renderPreviews(files) {
+      previewContainer.innerHTML = '';
+      if (!files || files.length === 0) {
+        previewContainer.style.display = 'none';
+        return;
       }
 
-      // ensure overlay hidden
-      overlay.classList.remove('show');
+      previewContainer.style.display = 'flex';
+      stackArea.style.display = 'flex';
 
-      // Render markdown if Present
-      if (responseBody && responseBody.textContent.trim().length > 0 && typeof marked !== 'undefined') {
-        const raw = responseBody.textContent;
-        // Simple security check: if it looks like markdown, render it.
-        // For production, use DOMPurify. Here we trust the API.
-        responseBody.innerHTML = marked.parse(raw);
-      }
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const card = document.createElement('div');
+          card.className = 'preview-card';
+          card.innerHTML = `
+                    <img class="preview-thumb" src="${e.target.result}" alt="preview" />
+                    <div class="preview-meta">
+                        <div class="name">${file.name}</div>
+                        <div class="size">${Math.round(file.size / 1024)} KB</div>
+                    </div>
+                `;
+          previewContainer.appendChild(card);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      responseCard.style.display = 'none'; // hide old response
     }
 
-    // On DOM ready
-    window.addEventListener('DOMContentLoaded', initFromSaved);
-
-    // file selection handler
     fileInput.addEventListener('change', (ev) => {
-      const f = ev.target.files && ev.target.files[0];
-      if (!f) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = reader.result;
-        try { localStorage.setItem(LS_KEY, dataUrl); } catch (err) { console.warn('localStorage save failed', err); }
-        showPreviewFromDataURL(dataUrl, true, f);
-        responseCard.style.display = 'none'; // hide previous server response until new response arrives
-        // keep stacked area visible
-        stackArea.style.display = 'flex';
-      };
-      reader.readAsDataURL(f);
+      if (ev.target.files) renderPreviews(ev.target.files);
     });
 
-    // drag & drop handlers
-    ['dragenter', 'dragover'].forEach(t => uploadPlate.addEventListener(t, (e) => { e.preventDefault(); }));
-    ['dragleave', 'drop'].forEach(t => uploadPlate.addEventListener(t, (e) => { e.preventDefault(); }));
+    // Drag & Drop
     uploadPlate.addEventListener('drop', (e) => {
       e.preventDefault();
       const dt = e.dataTransfer;
       if (dt && dt.files && dt.files.length) {
-        const file = dt.files[0];
-        const dtObj = new DataTransfer();
-        dtObj.items.add(file);
-        fileInput.files = dtObj.files;
-        fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+        fileInput.files = dt.files;
+        renderPreviews(dt.files);
       }
     });
 
-    // helper functions
-    function showPreviewFromDataURL(dataUrl, show = true, file = null) {
-      previewThumb.src = dataUrl;
-      metaName.textContent = file ? file.name : (metaName.textContent === 'No image uploaded' ? 'Uploaded image' : metaName.textContent);
-      metaSize.textContent = file ? `${Math.round(file.size / 1024)} KB • ${file.type || ''}` : metaSize.textContent || '';
-      if (show) previewCard.style.display = 'flex';
-      if (show) stackArea.style.display = 'flex';
-    }
-    function hidePreview() {
-      previewCard.style.display = 'none';
-      previewThumb.src = '';
-      metaName.textContent = 'No image uploaded';
-      metaSize.textContent = '';
-    }
-
-    // clear preview & hide response
+    // Clear
     clearBtn.addEventListener('click', () => {
-      try { localStorage.removeItem(LS_KEY); } catch (e) { }
       fileInput.value = '';
-      hidePreview();
+      previewContainer.innerHTML = '';
+      previewContainer.style.display = 'none';
       responseCard.style.display = 'none';
-      // smooth scroll back to upload plate so user remains in context
-      setTimeout(() => {
-        try { document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
-      }, 120);
     });
 
-    // show overlay on submit only if file selected
-    mainForm.addEventListener('submit', () => {
-      if (fileInput.files && fileInput.files.length) overlay.classList.add('show');
-    });
-
-    // copy button (safe guards)
-    if (copyBtn && responseBody) {
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(responseBody.textContent.trim());
-          const prev = copyBtn.innerHTML;
-          copyBtn.textContent = 'Copied';
-          setTimeout(() => { copyBtn.innerHTML = prev; }, 1200);
-        } catch (err) {
-          console.warn('clipboard failed', err);
-          copyBtn.textContent = 'Failed';
-          setTimeout(() => { copyBtn.innerHTML = 'Copy'; }, 1200);
-        }
-      });
-    }
-
-    // after full load, if both preview and response exist, scroll into view smoothly
-    window.addEventListener('load', () => {
-      let saved = null;
-      try { saved = localStorage.getItem(LS_KEY); } catch { }
-      const serverText = responseBody && responseBody.textContent && responseBody.textContent.trim().length > 0;
-      if (saved && serverText) {
-        try { responseBody.focus({ preventScroll: true }); } catch { }
-        setTimeout(() => {
-          try { responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
-          overlay.classList.remove('show');
-        }, 180);
-      } else {
-        overlay.classList.remove('show');
-      }
-    });
-
-    /* NOTES:
-       - localStorage stores the image as a dataURL for preview persistence after reload.
-         This is convenient but can use significant local storage for very large images.
-         If you expect huge images, consider switching to server-side temporary storage or sessionStorage.
-    */
+    // NOTE: Removed localStorage logic for simplicity with multi-files
+    // (Persisting multiple large blobs in localStorage is risky/complex)
   </script>
 </body>
 

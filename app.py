@@ -34,58 +34,69 @@ def get_gemini_client():
     return genai.Client(api_key=api_key)
 
 @app.route('/', methods=['GET', 'POST'])
-@limiter.limit("10 per minute") # Strict limit for the main analysis endpoint
+@limiter.limit("10 per minute") # Strict limit
 def index():
     response_text = None
     error_message = None
 
     if request.method == 'POST':
         try:
-            uploaded_file = request.files.get('file')
+            # 1. Handle Multiple Files
+            uploaded_files = request.files.getlist('file')
+            language = request.form.get('language', 'English')
             
-            # --- SECURITY CHECKS ---
-            if not uploaded_file or uploaded_file.filename == '':
-                error_message = "Please upload a valid image file."
+            valid_images = []
             
+            # --- SECURITY & VALIDATION LOOP ---
+            if not uploaded_files or uploaded_files[0].filename == '':
+                 error_message = "Please upload at least one valid image."
             else:
-                # Check 1: File Size (approximate check via seek/tell or content-length)
-                # Note: valid only if client sends content-length, or we read the blob.
-                # For robust check, we can check blob size after basic read.
-                uploaded_file.seek(0, os.SEEK_END)
-                file_size_mb = uploaded_file.tell() / (1024 * 1024)
-                uploaded_file.seek(0) # Reset cursor
-
-                if file_size_mb > MAX_FILE_SIZE_MB:
-                     error_message = f"File too large. Maximum size is {MAX_FILE_SIZE_MB}MB."
+                for file in uploaded_files:
+                    # Check Size
+                    file.seek(0, os.SEEK_END)
+                    size_mb = file.tell() / (1024 * 1024)
+                    file.seek(0)
+                    
+                    if size_mb > MAX_FILE_SIZE_MB:
+                        error_message = f"File {file.filename} is too large (> {MAX_FILE_SIZE_MB}MB)."
+                        break
+                    
+                    # Check Type
+                    if file.mimetype not in ALLOWED_MIMETYPES:
+                        error_message = f"File {file.filename} has invalid type. Only images allowed."
+                        break
+                    
+                    valid_images.append(Image.open(file))
+            
+            # If no errors and we have images, proceed to AI
+            if not error_message and valid_images:
                 
-                # Check 2: Mime Type
-                elif uploaded_file.mimetype not in ALLOWED_MIMETYPES:
-                    error_message = "Invalid file type. Only JPG, PNG, and WebP are allowed."
+                # Dynamic Prompt Construction
+                prompt_parts = [
+                    f"Analyze the uploaded medicine image(s). Provide response in **{language}** language.",
+                    "1. Identify the medicine(s) name, usage, dosage, and side effects.",
+                    "2. **Critical**: If multiple different medicines are visible, check for **DRUG INTERACTIONS** between them. Can they be taken together?",
+                    "3. **Affiliate/Buying**: For each identified medicine, generate a 'Buy Online' section.",
+                    "   - Provide search links to: **1mg**, **Apollo Pharmacy**, **Netmeds**, **Amazon**.",
+                    "   - Format: `[Buy on 1mg](https://www.1mg.com/search/all?name=<Medicine Name>)`",
+                    "4. Disclaimer: 'Consult a doctor before use.'"
+                ]
+                
+                full_prompt = "\n".join(prompt_parts)
 
-                else:
-                    # File is safe enough to process
-                    image = Image.open(uploaded_file)
-
-                    # AI prompt
-                    prompt = (
-                        "Analyze this uploaded medicine image. Provide accurate, clear, and useful medical details: "
-                        "medicine name, uses, composition, dosage guidance, side effects, and other user-relevant info. "
-                        "Also include a small note: 'Consult a doctor before use.'"
-                    )
-
-                    # Initialize client and generate content
-                    model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
-                    client = get_gemini_client()
-                    
-                    response = client.models.generate_content(
-                        model=model_name,
-                        contents=[prompt, image]
-                    )
-                    
-                    response_text = response.text if response.text else "No description generated."
+                # Initialize client
+                model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+                client = get_gemini_client()
+                
+                # Pass *List* of images + Prompt
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=[full_prompt] + valid_images
+                )
+                
+                response_text = response.text if response.text else "No description generated."
 
         except Exception as e:
-            # Handle RateLimitExceeded specifically if needed, otherwise general catch
             if "429" in str(e):
                 error_message = "Too many requests. Please try again in a minute."
             else:
