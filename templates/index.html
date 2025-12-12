@@ -5,6 +5,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Drug Detect AI — Smart Medicine Image Analyzer</title>
+
+  <!-- Google Analytics (Placeholder) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Manrope:wght@600;700&display=swap"
     rel="stylesheet">
@@ -270,6 +279,37 @@
       color: rgba(235, 255, 255, 0.9);
       opacity: 0.95;
       margin-top: 2px;
+    }
+
+    /* Language Button (Styled like Copy Button) */
+    .lang-wrapper {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+    }
+
+    .lang-select {
+      appearance: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: #eaffff;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 8px 12px 8px 32px;
+      /* Left padding for icon */
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      text-align: center;
+      transition: background 0.2s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23eaffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 8px center;
+    }
+
+    .lang-select:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .analyze-row {
@@ -563,17 +603,25 @@
           <div class="upload-title">Click or drag to upload</div>
           <div class="upload-sub">JPEG, PNG — clear photo of medicine</div>
 
-          <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
-
-          <div class="controls-row" style="margin-bottom: 12px; display: flex; gap: 10px; justify-content: center;">
-            <select name="language" id="langSelect"
-              style="padding: 8px 12px; border-radius: 8px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+          <!-- Language Selector Top Right -->
+          <div class="lang-wrapper">
+            <select name="language" id="langSelect" class="lang-select" title="Select Output Language">
               <option value="English">English</option>
               <option value="Hindi">Hindi (हिंदी)</option>
               <option value="Spanish">Spanish (Español)</option>
               <option value="French">French (Français)</option>
+              <option value="German">German (Deutsch)</option>
+              <option value="Italian">Italian (Italiano)</option>
+              <option value="Chinese">Chinese (中文)</option>
+              <option value="Japanese">Japanese (日本語)</option>
+              <option value="Korean">Korean (한국어)</option>
+              <option value="Portuguese">Portuguese (Português)</option>
+              <option value="Russian">Russian (Русский)</option>
+              <option value="Arabic">Arabic (العربية)</option>
             </select>
           </div>
+
+          <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
 
           <div class="analyze-row">
             <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image(s)</button>
@@ -618,6 +666,12 @@
 
     // --- MULTI-FILE PREVIEW LOGIC ---
     const previewContainer = document.getElementById('previewContainer');
+    const stackArea = document.getElementById('stackArea'); // Ensure stackArea is defined
+    const responseCard = document.getElementById('responseCard'); // Ensure responseCard is defined
+    const fileInput = document.getElementById('fileInput'); // Ensure fileInput is defined
+    const uploadPlate = document.getElementById('uploadPlate'); // Ensure uploadPlate is defined
+    const clearBtn = document.getElementById('clearBtn'); // Ensure clearBtn is defined
+
 
     function renderPreviews(files) {
       previewContainer.innerHTML = '';
@@ -651,6 +705,16 @@
 
     fileInput.addEventListener('change', (ev) => {
       if (ev.target.files) renderPreviews(ev.target.files);
+    });
+
+    // make plate clickable except when clicking buttons or inputs
+    uploadPlate.addEventListener('click', (e) => {
+      // Fix: Ignore clicks on button, select, or the lang-wrapper
+      if (e.target.closest('.analyze-btn') ||
+        e.target.closest('.clear-btn') ||
+        e.target.closest('button') ||
+        e.target.closest('select')) return;
+      fileInput.click();
     });
 
     // Drag & Drop
