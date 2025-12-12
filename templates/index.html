@@ -314,19 +314,39 @@
       background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Hide Google Translate Widget Header */
-    .goog-te-banner-frame {
+    /* Aggressive Google Translate Widget Hiding */
+    .goog-te-banner-frame.skiptranslate {
       display: none !important;
     }
 
-    body {
-      top: 0px !important;
+    iframe.goog-te-banner-frame {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
     }
 
+    /* Prevent Body Shift */
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+
+    /* Hide Tooltips and Highlights */
     .goog-tooltip {
       display: none !important;
     }
 
+    .goog-tooltip:hover {
+      display: none !important;
+    }
+
+    .goog-text-highlight {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Hide gadget specific elements */
     .goog-te-gadget-simple {
       background-color: transparent !important;
       border: none !important;
@@ -337,13 +357,21 @@
       display: none !important;
     }
 
-    /* Hide the google branding */
     .goog-logo-link {
       display: none !important;
     }
 
     .goog-te-gadget {
       color: transparent !important;
+      height: 0 !important;
+      overflow: hidden;
+    }
+
+    /* Ensure the wrapper also has 0 height/width so it doesn't take space */
+    #google_translate_element {
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden;
     }
 
     .analyze-row {
