@@ -686,12 +686,8 @@
               Copy
             </button>
             <div id="responseBody" class="response-body" tabindex="0">
-              {% if error %}
-              ### ⚠️ Error
-              {{ error }}
-              {% else %}
-              {{ response_text }}
-              {% endif %}
+              {% if error %}### ⚠️ Error
+              {{ error }}{% elif response_text %}{{ response_text }}{% endif %}
             </div>
           </div>
         </div>
@@ -823,6 +819,7 @@
       fileInput.value = '';
       previewContainer.innerHTML = '';
       previewContainer.style.display = 'none';
+      stackArea.style.display = 'none';
       responseCard.style.display = 'none';
       // Reset text
       originalText = "";
