@@ -73,8 +73,6 @@ def index():
                 
                 # Dynamic Prompt Construction
                 prompt_parts = [
-                # Dynamic Prompt Construction
-                prompt_parts = [
                     "Analyze the uploaded medicine image(s).",
                     "**Medicine Analysis**:",
                     "Present the details immediately in a **Markdown Table** with two columns: 'Feature' and 'Details'.",
