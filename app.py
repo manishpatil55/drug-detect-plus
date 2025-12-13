@@ -127,8 +127,11 @@ def index():
                     "",
                     "### 🛒 WHERE TO BUY",
                     "Provide a bulleted list of **search links** for major pharmacies.",
-                    "Format every item as a link: `[Vendor Name](Search URL)`.",
-                    "Include: **1mg**, **Apollo Pharmacy**, **Netmeds**, **Amazon**.",
+                    "Use these EXACT search URL patterns for the links (replace <Name> with medicine name):",
+                    "- 1mg: `https://www.1mg.com/search/all?name=<Name>`",
+                    "- Apollo: `https://www.apollopharmacy.in/search-medicines/<Name>`",
+                    "- Netmeds: `https://www.netmeds.com/catalogsearch/result/<Name>`",
+                    "- Amazon: `https://www.amazon.in/s?k=<Name>`",
                     "",
                     "### ℹ️ Disclaimer",
                     "'Consult a doctor before use.'"
