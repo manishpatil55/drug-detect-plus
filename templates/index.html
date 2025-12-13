@@ -847,15 +847,61 @@
     // NOTE: Removed localStorage logic for simplicity with multi-files
     // (Persisting multiple large blobs in localStorage is risky/complex)
 
-    // --- FORM SUBMISSION LOADER ---
+    // --- FORM SUBMISSION LOADER & AJAX ---
     const mainForm = document.getElementById('mainForm');
     const overlay = document.getElementById('overlay');
 
     if (mainForm) {
-      mainForm.addEventListener('submit', (e) => {
-        // Only show loader if files are selected
-        if (fileInput.files.length > 0) {
-          overlay.classList.add('show');
+      mainForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Stop page reload
+
+        // Validation
+        if (fileInput.files.length === 0) {
+          alert("Please select an image first.");
+          return;
+        }
+
+        overlay.classList.add('show');
+
+        const formData = new FormData(mainForm);
+
+        try {
+          // Send AJAX request
+          const response = await fetch('/', {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          });
+
+          const data = await response.json();
+
+          // Hide loader
+          overlay.classList.remove('show');
+
+          const responseBody = document.getElementById('responseBody');
+          const responseCard = document.getElementById('responseCard');
+          const stackArea = document.getElementById('stackArea'); // Ensure this is defined globally if used
+
+          if (data.error) {
+            responseBody.innerHTML = `<h3>⚠️ Error</h3><p>${data.error}</p>`;
+            responseCard.style.display = 'flex';
+            stackArea.style.display = 'flex';
+            responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (data.response_text) {
+            originalText = data.response_text; // Capture for translation
+            responseBody.innerHTML = marked.parse(data.response_text);
+            responseCard.style.display = 'flex';
+            stackArea.style.display = 'flex';
+
+            setTimeout(() => {
+              responseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+          }
+
+        } catch (err) {
+          console.error(err);
+          overlay.classList.remove('show');
+          alert("An unexpected error occurred.");
         }
       });
     }

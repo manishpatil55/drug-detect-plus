@@ -118,11 +118,14 @@ def index():
                             raise try_err
                         time.sleep(4) # Extended wait for Free Tier (15 RPM window)
 
-        except Exception as e:
             if "429" in str(e):
                 error_message = f"Google Free Tier Limit Reached. Details: {str(e)}"
             else:
                 error_message = f"Error: {str(e)}"
+
+    # Check for AJAX request
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify({'response_text': response_text, 'error': error_message})
 
     return render_template('index.html', response_text=response_text, error=error_message)
 
