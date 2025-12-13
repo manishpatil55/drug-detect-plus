@@ -73,10 +73,13 @@ def index():
                 
                 # Dynamic Prompt Construction
                 prompt_parts = [
+                # Dynamic Prompt Construction
+                prompt_parts = [
                     "Analyze the uploaded medicine image(s).",
-                    "### 💊 Medicine Analysis",
-                    "Present the details in a **Markdown Table** with two columns: 'Feature' and 'Details'.",
+                    "**Medicine Analysis**:",
+                    "Present the details immediately in a **Markdown Table** with two columns: 'Feature' and 'Details'.",
                     "Rows should include: **Medicine Name**, **Usage**, **Dosage**, **Side Effects**.",
+                    "Do NOT output a section header like '### Medicine Analysis'. Start directly with the table.",
                     "Do NOT use '##' headers inside the table.",
                     "",
                     "### ⚠️ Drug Interactions",
