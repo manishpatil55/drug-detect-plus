@@ -687,9 +687,12 @@
     let originalText = ""; // Store original English text
 
     async function triggerTranslation(targetLang) {
+      // Logic for capturing text if not yet captured
       if (!originalText) {
         const body = document.getElementById('responseBody');
-        originalText = body.innerText; // Capture text on first translate
+        // Use a flag or attribute to know if we are currently displaying HTML or text
+        // For safety, let's grab the raw text if we can, or just innerText
+        originalText = body.innerText;
       }
 
       if (targetLang === 'English') {
@@ -728,12 +731,12 @@
 
     // --- MULTI-FILE PREVIEW LOGIC ---
     const previewContainer = document.getElementById('previewContainer');
-    const stackArea = document.getElementById('stackArea'); // Ensure stackArea is defined
-    const responseCard = document.getElementById('responseCard'); // Ensure responseCard is defined
-    const fileInput = document.getElementById('fileInput'); // Ensure fileInput is defined
-    const uploadPlate = document.getElementById('uploadPlate'); // Ensure uploadPlate is defined
-    const clearBtn = document.getElementById('clearBtn'); // Ensure clearBtn is defined
-
+    const stackArea = document.getElementById('stackArea');
+    const responseCard = document.getElementById('responseCard');
+    const fileInput = document.getElementById('fileInput');
+    const uploadPlate = document.getElementById('uploadPlate');
+    const clearBtn = document.getElementById('clearBtn');
+    const copyBtn = document.getElementById('copyBtn'); // Get reference
 
     function renderPreviews(files) {
       previewContainer.innerHTML = '';
@@ -794,7 +797,25 @@
       previewContainer.innerHTML = '';
       previewContainer.style.display = 'none';
       responseCard.style.display = 'none';
+      // Reset text
+      originalText = "";
     });
+
+    // Copy Button Logic (Added Fix)
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const body = document.getElementById('responseBody');
+        const textToCopy = body.innerText; // Get visible text
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const icon = copyBtn.innerHTML;
+          copyBtn.innerHTML = "Copied!";
+          setTimeout(() => copyBtn.innerHTML = icon, 2000);
+        }).catch(err => {
+          console.error("Copy failed", err);
+          alert("Failed to copy text");
+        });
+      });
+    }
 
     // NOTE: Removed localStorage logic for simplicity with multi-files
     // (Persisting multiple large blobs in localStorage is risky/complex)
@@ -804,6 +825,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       const responseBody = document.getElementById('responseBody');
       const responseCard = document.getElementById('responseCard');
+      // Trim first to avoid empty space issues
       const serverText = responseBody && responseBody.textContent.trim().length > 0;
 
       // Also check if there is an error message (you might need to ensure error is rendered into a specific element if not using responseBody)
@@ -814,7 +836,12 @@
 
         // Render Markdown
         if (typeof marked !== 'undefined') {
-          responseBody.innerHTML = marked.parse(responseBody.textContent);
+          // Fix: remove common indentation
+          const raw = responseBody.textContent;
+          // A simple dedupe of indentation if it exists broadly, usually trim() is enough for start/end
+          // but for internal lines, Python output is usually clean "\n".
+          // The template indentation was the main culprit.
+          responseBody.innerHTML = marked.parse(raw);
         }
 
         // Scroll to result
