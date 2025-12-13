@@ -865,6 +865,8 @@
         if (typeof marked !== 'undefined') {
           // Fix: remove common indentation
           const raw = responseBody.textContent.trim();
+          originalText = raw; // Capture raw Markdown for translation
+
           // A simple dedupe of indentation if it exists broadly, usually trim() is enough for start/end
           // but for internal lines, Python output is usually clean "\n".
           // The template indentation was the main culprit.
