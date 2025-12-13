@@ -105,11 +105,11 @@ def index():
                         # If it's the last attempt or not a 429, re-raise to outer block
                         if attempt == 2 or "429" not in str(try_err):
                             raise try_err
-                        time.sleep(2) # Wait 2 seconds before retry
+                        time.sleep(4) # Extended wait for Free Tier (15 RPM window)
 
         except Exception as e:
             if "429" in str(e):
-                error_message = "Too many requests. Please try again in a minute."
+                error_message = "Google Free Tier Limit Reached (Too Fast). Please wait 30s."
             else:
                 error_message = f"Error: {str(e)}"
 
@@ -145,7 +145,7 @@ def translate_text():
             except Exception as try_err:
                  if attempt == 2 or "429" not in str(try_err):
                     raise try_err
-                 time.sleep(2)
+                 time.sleep(4) # Extended wait
 
         return jsonify({'translated_text': translated_text})
 
