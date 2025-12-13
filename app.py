@@ -91,13 +91,20 @@ def index():
                 model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
                 client = get_gemini_client()
                 
-                # Pass *List* of images + Prompt
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=[full_prompt] + valid_images
-                )
-                
-                response_text = response.text if response.text else "No description generated."
+                # Retry Logic (3 Attempts) to handle 429s
+                for attempt in range(3):
+                    try:
+                        response = client.models.generate_content(
+                            model=model_name,
+                            contents=[full_prompt] + valid_images
+                        )
+                        response_text = response.text if response.text else "No description generated."
+                        break # Success
+                    except Exception as try_err:
+                        # If it's the last attempt or not a 429, re-raise to outer block
+                        if attempt == 2 or "429" not in str(try_err):
+                            raise try_err
+                        time.sleep(2) # Wait 2 seconds before retry
 
         except Exception as e:
             if "429" in str(e):
@@ -124,12 +131,22 @@ def translate_text():
         
         prompt = f"Translate the following medical analysis to {target_lang}. Maintain all Markdown formatting (bold, headers, links) exactly as is. Output only the translated text.\n\n{text}"
         
-        response = client.models.generate_content(
-            model=model_name,
-            contents=[prompt]
-        )
-        
-        return jsonify({'translated_text': response.text})
+        # Retry Logic (3 Attempts) for Translation
+        translated_text = ""
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=[prompt]
+                )
+                translated_text = response.text
+                break
+            except Exception as try_err:
+                 if attempt == 2 or "429" not in str(try_err):
+                    raise try_err
+                 time.sleep(2)
+
+        return jsonify({'translated_text': translated_text})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
