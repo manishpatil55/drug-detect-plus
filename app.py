@@ -89,7 +89,7 @@ def index():
                 full_prompt = "\n".join(prompt_parts)
 
                 # Initialize client
-                model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+                model_name = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
                 client = get_gemini_client()
                 
                 # Retry Logic (3 Attempts) to handle 429s
@@ -127,7 +127,7 @@ def translate_text():
             return jsonify({'error': 'Invalid request'}), 400
 
         # Translation Prompt
-        model_name = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+        model_name = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
         client = get_gemini_client()
         
         prompt = f"Translate the following medical analysis to {target_lang}. Maintain all Markdown formatting (bold, headers, links) exactly as is. Output only the translated text.\n\n{text}"
