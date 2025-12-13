@@ -16,12 +16,10 @@ app = Flask(__name__)
 
 # --- SECURITY CONFIGURATION ---
 # 1. Rate Limiting: Restrict IP to 10 requests per minute to prevent spam/quota drain
-limiter = Limiter(
-    get_remote_address,
-    app=app,
-    default_limits=["1000 per day", "10 per minute"],
-    storage_uri="memory://"
-)
+# --- SECURITY CONFIGURATION ---
+# Rate Limiting removed as per user request
+# limiter = Limiter(...)
+
 
 # 2. File Validation Config
 MAX_FILE_SIZE_MB = 10
@@ -72,7 +70,7 @@ def generate_content_with_rotation(model_name, contents):
     raise last_error
 
 @app.route('/', methods=['GET', 'POST'])
-@limiter.limit("10 per minute") # Strict limit
+# @limiter.limit("10 per minute") # Removed
 def index():
     response_text = None
     error_message = None
@@ -165,7 +163,7 @@ def index():
     return render_template('index.html', response_text=response_text, error=error_message)
 
 @app.route('/translate', methods=['POST'])
-@limiter.limit("20 per minute")
+# @limiter.limit("20 per minute")
 def translate_text():
     try:
         data = request.json
