@@ -27,12 +27,49 @@ limiter = Limiter(
 MAX_FILE_SIZE_MB = 10
 ALLOWED_MIMETYPES = {"image/jpeg", "image/png", "image/webp"}
 
-# Helper function to get the Gemini client
-def get_gemini_client():
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise ValueError("GEMINI_API_KEY not found in environment variables")
-    return genai.Client(api_key=api_key)
+# --- HELPER: Multi-Key Rotation Logic ---
+def generate_content_with_rotation(model_name, contents):
+    """
+    Rotates through comma-separated GEMINI_API_KEYs on 429 errors.
+    Returns: response object
+    Raises: Exception if all keys fail.
+    """
+    raw_keys = os.getenv("GEMINI_API_KEY", "")
+    if not raw_keys:
+        raise ValueError("GEMINI_API_KEY not set")
+    
+    api_keys = [k.strip() for k in raw_keys.split(',') if k.strip()]
+    if not api_keys:
+         raise ValueError("No valid keys found in GEMINI_API_KEY")
+
+    last_error = None
+    
+    for i, key in enumerate(api_keys):
+        try:
+            # Create client for this specific key
+            client = genai.Client(api_key=key)
+            
+            # Attempt generation
+            response = client.models.generate_content(
+                model=model_name,
+                contents=contents
+            )
+            return response # Success!
+            
+        except Exception as e:
+            last_error = e
+            # Only rotate if it's a Quota/Rate limit error (429)
+            if "429" in str(e):
+                print(f"⚠️ Key {i+1}/{len(api_keys)} exhausted (429). Rotating to next key...")
+                continue # Try next key
+            else:
+                # If it's a model not found or other fatal error, typical retry won't help
+                # UNLESS it's a server error (500), but generic '429' check is safest for quota.
+                # Currently we only catch 429 for rotation.
+                raise e
+
+    # If we exit loop, all keys failed
+    raise last_error
 
 @app.route('/', methods=['GET', 'POST'])
 @limiter.limit("10 per minute") # Strict limit
@@ -99,24 +136,16 @@ def index():
                 
                 full_prompt = "\n".join(prompt_parts)
 
-                # Initialize client
+                # Initialize client & Generate with Rotation
                 model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
-                client = get_gemini_client()
                 
-                # Retry Logic (3 Attempts) to handle 429s
-                for attempt in range(3):
-                    try:
-                        response = client.models.generate_content(
-                            model=model_name,
-                            contents=[full_prompt] + valid_images
-                        )
-                        response_text = response.text if response.text else "No description generated."
-                        break # Success
-                    except Exception as try_err:
-                        # If it's the last attempt or not a 429, re-raise to outer block
-                        if attempt == 2 or "429" not in str(try_err):
-                            raise try_err
-                        time.sleep(4) # Extended wait for Free Tier (15 RPM window)
+                response = generate_content_with_rotation(
+                    model_name=model_name, 
+                    contents=[full_prompt] + valid_images
+                )
+                
+                response_text = response.text if response.text else "No description generated."
+
 
         except Exception as e:
             if "429" in str(e):
@@ -148,24 +177,14 @@ def translate_text():
 
         # Translation Prompt
         model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
-        client = get_gemini_client()
-        
         prompt = f"Translate the following medical analysis to {target_lang}. Maintain all Markdown formatting (bold, headers, links) exactly as is. Output only the translated text.\n\n{text}"
         
-        # Retry Logic (3 Attempts) for Translation
-        translated_text = ""
-        for attempt in range(3):
-            try:
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=[prompt]
-                )
-                translated_text = response.text
-                break
-            except Exception as try_err:
-                 if attempt == 2 or "429" not in str(try_err):
-                    raise try_err
-                 time.sleep(4) # Extended wait
+        # Call with Rotation
+        response = generate_content_with_rotation(
+            model_name=model_name,
+            contents=[prompt]
+        )
+        translated_text = response.text
 
         return jsonify({'translated_text': translated_text})
 
