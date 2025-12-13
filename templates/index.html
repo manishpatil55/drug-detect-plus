@@ -533,6 +533,55 @@
       border-color: #6ee;
     }
 
+    /* Buy Buttons Styling */
+    .response-body a[href*="1mg.com"],
+    .response-body a[href*="apollopharmacy"],
+    .response-body a[href*="netmeds"],
+    .response-body a[href*="amazon"] {
+      display: inline-block;
+      padding: 8px 16px;
+      margin: 4px 6px 4px 0;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: #eaffff;
+      font-weight: 600;
+      font-size: 13px;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .response-body a[href*="1mg.com"]:hover {
+      background: #ff6f61;
+      color: white;
+      border-color: transparent;
+    }
+
+    .response-body a[href*="apollopharmacy"]:hover {
+      background: #00887a;
+      color: white;
+      border-color: transparent;
+    }
+
+    .response-body a[href*="netmeds"]:hover {
+      background: #32aeb1;
+      color: white;
+      border-color: transparent;
+    }
+
+    .response-body a[href*="amazon"]:hover {
+      background: #ff9900;
+      color: black;
+      border-color: transparent;
+    }
+
+    .response-body a[href*="1mg.com"]:active,
+    .response-body a[href*="apollopharmacy"]:active,
+    .response-body a[href*="netmeds"]:active,
+    .response-body a[href*="amazon"]:active {
+      transform: scale(0.96);
+    }
+
     .copy-btn {
       position: absolute;
       right: 12px;
