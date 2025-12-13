@@ -818,26 +818,14 @@
       }
     });
 
-    // Clear to Initial State
+    // Clear
     clearBtn.addEventListener('click', () => {
-      // 1. Reset Inputs
       fileInput.value = '';
-
-      // 2. Hide Preview
       previewContainer.innerHTML = '';
       previewContainer.style.display = 'none';
-
-      // 3. Hide Response & Container
       responseCard.style.display = 'none';
-      // Also hide the background/stack area if it was shown
-      if (typeof stackArea !== 'undefined') stackArea.style.display = 'none';
-
-      // 4. Reset Internal State
-      responseBody.innerHTML = '';
+      // Reset text
       originalText = "";
-
-      // 5. Ensure loader is hidden
-      if (typeof overlay !== 'undefined') overlay.classList.remove('show');
     });
 
     // Copy Button Logic (Added Fix)
