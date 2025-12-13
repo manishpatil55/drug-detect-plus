@@ -124,7 +124,7 @@ def index():
                     "- [Buy on 1mg](https://www.1mg.com/search/all?name=<Name>)",
                     "- [Buy on Apollo](https://www.apollopharmacy.in/search-medicines/<Name>)",
                     "- [Buy on Netmeds](https://www.netmeds.com/catalogsearch/result?q=<Name>)",
-                    "- [Buy on Amazon](https://www.amazon.in/s?k=<Name>)",
+                    "- [Buy on Amazon](https://www.amazon.in/s?k=<Name>&tag=drugdetectai-21)",
                     "",
                     "---",
                     "",
