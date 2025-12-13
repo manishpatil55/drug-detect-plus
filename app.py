@@ -109,7 +109,7 @@ def index():
 
         except Exception as e:
             if "429" in str(e):
-                error_message = "Google Free Tier Limit Reached (Too Fast). Please wait 30s."
+                error_message = f"Google Free Tier Limit Reached. Details: {str(e)}"
             else:
                 error_message = f"Error: {str(e)}"
 
