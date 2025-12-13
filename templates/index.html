@@ -847,6 +847,19 @@
     // NOTE: Removed localStorage logic for simplicity with multi-files
     // (Persisting multiple large blobs in localStorage is risky/complex)
 
+    // --- FORM SUBMISSION LOADER ---
+    const mainForm = document.getElementById('mainForm');
+    const overlay = document.getElementById('overlay');
+
+    if (mainForm) {
+      mainForm.addEventListener('submit', (e) => {
+        // Only show loader if files are selected
+        if (fileInput.files.length > 0) {
+          overlay.classList.add('show');
+        }
+      });
+    }
+
     // --- SERVER RESPONSE HANDLING ---
     // If the server rendered the page with a response or error, show the card.
     window.addEventListener('DOMContentLoaded', () => {
