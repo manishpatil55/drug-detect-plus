@@ -6,8 +6,8 @@ from google import genai
 from flask import Flask, request, render_template, jsonify
 
 # Security Imports
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
+# from flask_limiter import Limiter
+# from flask_limiter.util import get_remote_address
 
 # Load environment variables
 load_dotenv()
@@ -15,11 +15,13 @@ load_dotenv()
 app = Flask(__name__)
 
 # --- SECURITY CONFIGURATION ---
-# 1. Rate Limiting: Restrict IP to 10 requests per minute to prevent spam/quota drain
-# --- SECURITY CONFIGURATION ---
-# Rate Limiting removed as per user request
-# limiter = Limiter(...)
-
+# Rate Limiting DISABLED per user request
+# limiter = Limiter(
+#     get_remote_address,
+#     app=app,
+#     default_limits=["1000 per day", "10 per minute"],
+#     storage_uri="memory://"
+# )
 
 # 2. File Validation Config
 MAX_FILE_SIZE_MB = 10
@@ -70,7 +72,7 @@ def generate_content_with_rotation(model_name, contents):
     raise last_error
 
 @app.route('/', methods=['GET', 'POST'])
-# @limiter.limit("10 per minute") # Removed
+# @limiter.limit("10 per minute") # Strict limit
 def index():
     response_text = None
     error_message = None
