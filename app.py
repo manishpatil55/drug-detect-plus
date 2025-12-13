@@ -120,7 +120,12 @@ def index():
 
         except Exception as e:
             if "429" in str(e):
-                error_message = f"Google Free Tier Limit Reached. Details: {str(e)}"
+                error_message = (
+                    "🚨 **Daily Quota Exceeded**.<br>"
+                    "Your free API key has hit its limit (20/day) for this model.<br>"
+                    "**Fix:** Create a NEW Google API Key (in a new project) to get 1500 requests/day.<br>"
+                    f"<small>Details: {str(e)}</small>"
+                )
             else:
                 error_message = f"Error: {str(e)}"
 
