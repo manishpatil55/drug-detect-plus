@@ -118,6 +118,7 @@ def index():
                             raise try_err
                         time.sleep(4) # Extended wait for Free Tier (15 RPM window)
 
+        except Exception as e:
             if "429" in str(e):
                 error_message = f"Google Free Tier Limit Reached. Details: {str(e)}"
             else:
