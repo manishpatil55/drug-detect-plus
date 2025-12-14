@@ -119,7 +119,7 @@ def index():
                     "Create a Markdown Table with columns 'Feature' and 'Details'.",
                     "Rows: **Usage**, **Dosage** (Adult/Child), **Side Effects** (Common/Rare), **Mechanism**.",
                     "",
-                    "**Where to Buy**",
+                    "### 🛒 Where to Buy",
                     "Output these 4 links on a **SINGLE LINE** separated by standard spaces.",
                     "**IMPORTANT**: In the URLs, replace any spaces in the medicine name with `+` (e.g., `Calpol+500`). Do NOT leave actual spaces in the URL.",
                     "Format: `[Buy on Vendor](URL)` (No space between brackets and parentheses).",
