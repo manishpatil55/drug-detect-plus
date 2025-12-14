@@ -118,7 +118,13 @@ def index():
                     contents_payload = valid_images
                 else:
                     # TEXT MODE
-                    context_instruction = f"Analyze the medicine named '{text_query}'."
+                    context_instruction = (
+                        f"Analyze the medicine based on this search query: '{text_query}'.\n"
+                        "**IMPORTANT**: "
+                        "1. If the name is misspelled (e.g., 'vasogren' or 'dolo 65'), **infer the most likely intended medicine** and analyze that.\n"
+                        "2. Handle lowercase/uppercase variations flexibly.\n"
+                        "3. If the query is descriptive (e.g., 'medicine for grainy migraine'), identify the standard medicine it refers to."
+                    )
                     contents_payload = [] # Text will be part of the prompt string
 
                 prompt_parts = [
