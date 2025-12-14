@@ -79,59 +79,14 @@ def index():
 
     if request.method == 'POST':
         try:
-            # 1. Inputs
-            search_query = request.form.get('search_query', '').strip()
+            # 1. Handle Inputs (Text OR Image)
+            text_query = request.form.get('text_query', '').strip()
             uploaded_files = request.files.getlist('file')
             
             valid_images = []
             
-            # --- SHARED PROMPT TEMPLATE (Ensures consistent output) ---
-            PROMPT_TEMPLATE = [
-                "For **EACH** distinct medicine detected/identified, output the following section:",
-                "",
-                "### <Medicine Name>",
-                "",
-                "**Analysis Table**",
-                "Create a Markdown Table with columns 'Feature' and 'Details'.",
-                "Rows: **Usage**, **Dosage** (Adult/Child), **Side Effects** (Common/Rare), **Mechanism**.",
-                "",
-                "### 🛒 Where to Buy",
-                "Output these 4 links on a **SINGLE LINE** separated by standard spaces.",
-                "**IMPORTANT**: In the URLs, replace any spaces in the medicine name with `+` (e.g., `Calpol+500`). Do NOT leave actual spaces in the URL.",
-                "Format: `[Buy on Vendor](URL)` (No space between brackets and parentheses).",
-                "- [Buy on 1mg](https://www.1mg.com/search/all?name=<Name_with_+>)",
-                "- [Buy on Apollo](https://www.apollopharmacy.in/search-medicines/<Name_with_+>)",
-                "- [Buy on Netmeds](https://www.netmeds.com/catalogsearch/result?q=<Name_with_+>)",
-                "- [Buy on Amazon](https://www.amazon.in/s?k=<Name_with_+>&tag=drugdetectai-21)",
-                "",
-                "---",
-                "",
-                "(After listing all medicines):",
-                "### ⚠️ Drug Interactions",
-                "Checking if these medicines can be taken together...",
-                "",
-                "### ℹ️ Disclaimer",
-                "'Consult a doctor before use.'"
-            ]
-
-            full_prompt = ""
-            contents = []
-
-            # --- BRANCH 1: TEXT SEARCH ---
-            if search_query:
-                # Text-based Analysis
-                mode_intro = [
-                    f"Analyze the medicine named: '{search_query}'.",
-                    "If the name matches a known medicine, provide detailed analysis.",
-                    "If the name is misspelled, autocorrect it and analyze.",
-                    "If the query is NOT a medicine, reply: '❌ I could not identify a medicine with that name. Please check the spelling.'"
-                ]
-                full_prompt = "\n".join(mode_intro + PROMPT_TEMPLATE)
-                contents = [full_prompt]
-
-            # --- BRANCH 2: IMAGE UPLOAD ---
-            elif uploaded_files and uploaded_files[0].filename != '':
-                # Image Validation Loop
+            # Process Images
+            if uploaded_files and uploaded_files[0].filename != '':
                 for file in uploaded_files:
                     # Check Size
                     file.seek(0, os.SEEK_END)
@@ -142,28 +97,70 @@ def index():
                         error_message = f"File {file.filename} is too large (> {MAX_FILE_SIZE_MB}MB)."
                         break
                     
+                    # Check Type
                     if file.mimetype not in ALLOWED_MIMETYPES:
                         error_message = f"File {file.filename} has invalid type. Only images allowed."
                         break
                     
-                    valid_images.append(Image.open(file))
-                
-                if not error_message and valid_images:
-                    mode_intro = ["Analyze the uploaded medicine image(s)."]
-                    full_prompt = "\n".join(mode_intro + PROMPT_TEMPLATE)
-                    contents = [full_prompt] + valid_images
-            
-            else:
-                error_message = "Please upload an image OR type a medicine name."
+                    img_data = file.read()
+                    valid_images.append(types.Part.from_bytes(data=img_data, mime_type=file.mimetype))
 
-            # --- GENERATE CONTENT ---
-            if not error_message and contents:
+            # Logic: If no image and no text -> Error
+            if not valid_images and not text_query:
+                error_message = "Please upload an image OR enter a medicine name."
+            
+            # If no errors and we have images or text, proceed to AI
+            if not error_message:
+                # Dynamic Prompt Construction
+                if valid_images:
+                    # IMAGE MODE
+                    context_instruction = "Analyze the uploaded medicine image(s)."
+                    contents_payload = valid_images
+                else:
+                    # TEXT MODE
+                    context_instruction = f"Analyze the medicine named '{text_query}'."
+                    contents_payload = [] # Text will be part of the prompt string
+
+                prompt_parts = [
+                    context_instruction,
+                    "For **EACH** distinct medicine detected (or searched), output the following section:",
+                    "",
+                    "### <Medicine Name>",
+                    "",
+                    "**Analysis Table**",
+                    "Create a Markdown Table with columns 'Feature' and 'Details'.",
+                    "Rows: **Usage**, **Dosage** (Adult/Child), **Side Effects** (Common/Rare), **Mechanism**.",
+                    "",
+                    "**Where to Buy**",
+                    "Output these 4 links on a **SINGLE LINE** separated by standard spaces.",
+                    "**IMPORTANT**: In the URLs, replace any spaces in the medicine name with `+` (e.g., `Calpol+500`). Do NOT leave actual spaces in the URL.",
+                    "Format: `[Buy on Vendor](URL)` (No space between brackets and parentheses).",
+                    "- [Buy on 1mg](https://www.1mg.com/search/all?name=<Name_with_+>)",
+                    "- [Buy on Apollo](https://www.apollopharmacy.in/search-medicines/<Name_with_+>)",
+                    "- [Buy on Netmeds](https://www.netmeds.com/catalogsearch/result?q=<Name_with_+>)",
+                    "- [Buy on Amazon](https://www.amazon.in/s?k=<Name_with_+>&tag=drugdetectai-21)",
+                    "",
+                    "---",
+                    "",
+                    "(After listing all medicines):",
+                    "### ⚠️ Drug Interactions",
+                    "Checking if these medicines can be taken together...",
+                    "",
+                    "### ℹ️ Disclaimer",
+                    "'Consult a doctor before use.'"
+                ]
+                
+                full_prompt = "\n".join(prompt_parts)
+
                 # Initialize client & Generate with Rotation
                 model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
                 
+                # Combine prompt + (optional) images
+                final_contents = [full_prompt] + contents_payload
+                
                 response = generate_content_with_rotation(
                     model_name=model_name, 
-                    contents=contents
+                    contents=final_contents
                 )
                 
                 response_text = response.text if response.text else "No description generated."
