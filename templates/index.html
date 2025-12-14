@@ -689,14 +689,7 @@
     </header>
 
     <div class="card" role="region" aria-label="Upload area">
-      <p class="subtitle">Upload a medicine image <b>OR</b> search by name.</p>
-
       <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate>
-        <!-- Search Input Section -->
-        <div class="search-container" style="margin-bottom: 20px; text-align: center;">
-          <input type="text" name="text_query" id="textQuery" placeholder="e.g. Dolo 650, Calpol, Vitamin C..."
-            style="width: 100%; max-width: 400px; padding: 12px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 16px; outline: none; transition: all 0.3s;">
-        </div>
 
         <div class="upload-plate" id="uploadPlate" aria-hidden="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
@@ -708,51 +701,61 @@
 
           <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
 
-          <div class="analyze-row">
-            <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image(s)</button>
-            <button type="button" class="clear-btn" id="clearBtn">Clear</button>
-          </div>
+          <!-- Integrated Search Divider -->
+          <div
+            style="margin: 15px 0; color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
+            - OR -</div>
+
+          <!-- Integrated Search Input -->
+          <input type="text" name="text_query" id="textQuery" placeholder="Type medicine name (e.g. Dolo 650)..."
+            style="width: 90%; padding: 10px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.2); color: white; font-size: 14px; outline: none; transition: all 0.3s; text-align: center;">
         </div>
 
-        <div class="stack" id="stackArea" style="display:none;">
-          <div id="previewContainer" style="display:none; flex-direction: column; gap: 10px;">
-            <!-- Dynamic User Previews will be injected here via JS -->
-          </div>
-
-          <div class="response-card" id="responseCard" style="display:none;">
-            <div class="response-title">AI Response
-            </div>
-
-            <!-- Translation Dropdown next to Copy -->
-            <div class="lang-wrapper">
-              <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
-                <option value="English">English</option>
-                <option value="Hindi">Hindi (हिंदी)</option>
-                <option value="Spanish">Spanish (Español)</option>
-                <option value="French">French (Français)</option>
-                <option value="German">German (Deutsch)</option>
-                <option value="Chinese">Chinese (中文)</option>
-                <option value="Arabic">Arabic (العربية)</option>
-              </select>
-            </div>
-
-            <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
-              <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
-              </svg>
-              Copy
-            </button>
-            <div id="responseBody" class="response-body" tabindex="0">
-              {% if error %}### ⚠️ Error
-              {{ error }}{% elif response_text %}{{ response_text }}{% endif %}
-            </div>
-          </div>
+        <div class="analyze-row">
+          <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image(s)</button>
+          <button type="button" class="clear-btn" id="clearBtn">Clear</button>
         </div>
-      </form>
     </div>
 
-    <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
+    <div class="stack" id="stackArea" style="display:none;">
+      <div id="previewContainer" style="display:none; flex-direction: column; gap: 10px;">
+        <!-- Dynamic User Previews will be injected here via JS -->
+      </div>
+
+      <div class="response-card" id="responseCard" style="display:none;">
+        <div class="response-title">AI Response
+        </div>
+
+        <!-- Translation Dropdown next to Copy -->
+        <div class="lang-wrapper">
+          <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
+            <option value="English">English</option>
+            <option value="Hindi">Hindi (हिंदी)</option>
+            <option value="Spanish">Spanish (Español)</option>
+            <option value="French">French (Français)</option>
+            <option value="German">German (Deutsch)</option>
+            <option value="Chinese">Chinese (中文)</option>
+            <option value="Arabic">Arabic (العربية)</option>
+          </select>
+        </div>
+
+        <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
+          </svg>
+          Copy
+        </button>
+        <div id="responseBody" class="response-body" tabindex="0">
+          {% if error %}### ⚠️ Error
+          {{ error }}{% elif response_text %}{{ response_text }}{% endif %}
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
   </div>
 
   <div class="overlay" id="overlay" aria-hidden="true">
