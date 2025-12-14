@@ -79,15 +79,15 @@ def index():
 
     if request.method == 'POST':
         try:
-            # 1. Handle Multiple Files
+            # 1. Handle Inputs
             uploaded_files = request.files.getlist('file')
+            text_input = request.form.get('text')
             
             valid_images = []
-            
-            # --- SECURITY & VALIDATION LOOP ---
-            if not uploaded_files or uploaded_files[0].filename == '':
-                 error_message = "Please upload at least one valid image."
-            else:
+            user_content = []
+
+            # A. Process Files
+            if uploaded_files and uploaded_files[0].filename != '':
                 for file in uploaded_files:
                     # Check Size
                     file.seek(0, os.SEEK_END)
@@ -98,20 +98,33 @@ def index():
                         error_message = f"File {file.filename} is too large (> {MAX_FILE_SIZE_MB}MB)."
                         break
                     
-                    # Check Type
-                    if file.mimetype not in ALLOWED_MIMETYPES:
-                        error_message = f"File {file.filename} has invalid type. Only images allowed."
-                        break
-                    
-                    valid_images.append(Image.open(file))
-            
-            # If no errors and we have images, proceed to AI
-            if not error_message and valid_images:
+                    if file.filename == '': continue
+                    if file.mimetype.startswith('image/'):
+                        image_data = base64.b64encode(file.read()).decode('utf-8')
+                        valid_images.append({'mime_type': file.mimetype, 'data': image_data})
+                
+                if not error_message and valid_images:
+                     user_content.extend([types.Part.from_bytes(data=base64.b64decode(img['data']), mime_type=img['mime_type']) for img in valid_images])
+
+            # B. Process Text
+            if text_input and text_input.strip():
+                user_content.append(f"Medicine Name to Analyze: {text_input}")
+
+            # Validation: Must have something
+            if not user_content:
+                 error_message = "Please upload an image OR enter a medicine name."
+
+            if not error_message:
                 
                 # Dynamic Prompt Construction
+                if valid_images:
+                    intro_prompt = "Analyze the uploaded medicine image(s)."
+                else:
+                    intro_prompt = f"Analyze the medicine named: '{text_input}'. Provide detailed medical information."
+
                 prompt_parts = [
-                    "Analyze the uploaded medicine image(s).",
-                    "For **EACH** distinct medicine detected, output the following section:",
+                    intro_prompt,
+                    "For **EACH** distinct medicine detected/named, output the following section:",
                     "",
                     "### <Medicine Name>",
                     "",
@@ -119,7 +132,7 @@ def index():
                     "Create a Markdown Table with columns 'Feature' and 'Details'.",
                     "Rows: **Usage**, **Dosage** (Adult/Child), **Side Effects** (Common/Rare), **Mechanism**.",
                     "",
-                    "### 🛒 Where to Buy",
+                    "**Where to Buy**",
                     "Output these 4 links on a **SINGLE LINE** separated by standard spaces.",
                     "**IMPORTANT**: In the URLs, replace any spaces in the medicine name with `+` (e.g., `Calpol+500`). Do NOT leave actual spaces in the URL.",
                     "Format: `[Buy on Vendor](URL)` (No space between brackets and parentheses).",
@@ -143,9 +156,12 @@ def index():
                 # Initialize client & Generate with Rotation
                 model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
                 
+                # Combine System Prompt + User Content (Image/Text)
+                final_contents = [full_prompt] + user_content
+                
                 response = generate_content_with_rotation(
                     model_name=model_name, 
-                    contents=[full_prompt] + valid_images
+                    contents=final_contents
                 )
                 
                 response_text = response.text if response.text else "No description generated."
