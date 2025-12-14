@@ -688,74 +688,75 @@
       <p class="lead">Smart Medicine Image Analyzer</p>
     </header>
 
-    <div class="card" role="region" aria-label="Upload area">
-      <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate>
+    <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate style="width: 100%; max-width: 480px;">
 
+      <!-- Modern Hero Search -->
+      <div class="search-hero" style="margin-bottom: 30px; position: relative; z-index: 10;">
+        <input type="text" name="text_query" id="textQuery" placeholder="Search medicine (e.g. Dolo 650)..." style="width: 100%; padding: 16px 24px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); 
+                 background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); color: white; font-size: 1.1rem; 
+                 box-shadow: 0 8px 32px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;">
+        <div
+          style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.6;">
+          🔍
+        </div>
+      </div>
+
+      <div class="card" role="region" aria-label="Upload area">
         <div class="upload-plate" id="uploadPlate" aria-hidden="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M12 16V8M12 8l-3 3M12 8l3 3M21 15v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
           </svg>
-          <div class="upload-title">Click or drag to upload</div>
-          <div class="upload-sub">JPEG, PNG — clear photo of medicine</div>
+          <div class="upload-title">Click or drag image</div>
+          <div class="upload-sub">JPEG, PNG — Visual Analysis</div>
 
           <input id="fileInput" name="file" type="file" accept="image/*" multiple style="display:none;">
 
-          <!-- Integrated Search Divider -->
-          <div
-            style="margin: 15px 0; color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
-            - OR -</div>
-
-          <!-- Integrated Search Input -->
-          <input type="text" name="text_query" id="textQuery" placeholder="Type medicine name (e.g. Dolo 650)..."
-            style="width: 90%; padding: 10px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.2); color: white; font-size: 14px; outline: none; transition: all 0.3s; text-align: center;">
+          <div class="analyze-row">
+            <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze</button>
+            <button type="button" class="clear-btn" id="clearBtn">Clear</button>
+          </div>
         </div>
 
-        <div class="analyze-row">
-          <button type="submit" class="analyze-btn" id="analyzeBtn">Analyze Image(s)</button>
-          <button type="button" class="clear-btn" id="clearBtn">Clear</button>
-        </div>
-    </div>
+        <div class="stack" id="stackArea" style="display:none;">
+          <div id="previewContainer" style="display:none; flex-direction: column; gap: 10px;">
+            <!-- Dynamic User Previews will be injected here via JS -->
+          </div>
 
-    <div class="stack" id="stackArea" style="display:none;">
-      <div id="previewContainer" style="display:none; flex-direction: column; gap: 10px;">
-        <!-- Dynamic User Previews will be injected here via JS -->
-      </div>
+          <div class="response-card" id="responseCard" style="display:none;">
+            <div class="response-title">AI Response
+            </div>
 
-      <div class="response-card" id="responseCard" style="display:none;">
-        <div class="response-title">AI Response
-        </div>
+            <!-- Translation Dropdown next to Copy -->
+            <div class="lang-wrapper">
+              <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi (हिंदी)</option>
+                <option value="Spanish">Spanish (Español)</option>
+                <option value="French">French (Français)</option>
+                <option value="German">German (Deutsch)</option>
+                <option value="Chinese">Chinese (中文)</option>
+                <option value="Arabic">Arabic (العربية)</option>
+              </select>
+            </div>
 
-        <!-- Translation Dropdown next to Copy -->
-        <div class="lang-wrapper">
-          <select id="customLangSelect" class="lang-select" onchange="triggerTranslation(this.value)">
-            <option value="English">English</option>
-            <option value="Hindi">Hindi (हिंदी)</option>
-            <option value="Spanish">Spanish (Español)</option>
-            <option value="French">French (Français)</option>
-            <option value="German">German (Deutsch)</option>
-            <option value="Chinese">Chinese (中文)</option>
-            <option value="Arabic">Arabic (العربية)</option>
-          </select>
-        </div>
-
-        <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
-          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
-          </svg>
-          Copy
-        </button>
-        <div id="responseBody" class="response-body" tabindex="0">
-          {% if error %}### ⚠️ Error
-          {{ error }}{% elif response_text %}{{ response_text }}{% endif %}
+            <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy result">
+              <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 7V3h11v11h-4M16 13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
+              </svg>
+              Copy
+            </button>
+            <div id="responseBody" class="response-body" tabindex="0">
+              {% if error %}### ⚠️ Error
+              {{ error }}{% elif response_text %}{{ response_text }}{% endif %}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </form>
-  </div>
 
-  <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
+    <footer style="opacity:0.95; font-size:13px;">© 2025 Drug Detect AI</footer>
   </div>
 
   <div class="overlay" id="overlay" aria-hidden="true">
