@@ -79,6 +79,8 @@
       box-sizing: border-box;
 
       /* background moved to .bg-fixed */
+      zoom: 1.15;
+      /* Scales the entire UI by 15% (Mimics Browser Zoom) */
     }
 
     /* === Orb Styles Removed === */
@@ -712,8 +714,9 @@
       body {
         padding: 20px 0;
         /* Remove side padding from body, handle in stage */
-        overflow-x: hidden;
         /* Prevent scroll overflow */
+        zoom: 1.0;
+        /* Reset zoom on mobile */
       }
 
       .stage {
