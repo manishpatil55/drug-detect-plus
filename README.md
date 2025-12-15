@@ -116,17 +116,6 @@ Steps_To_Replicate:
 
 ---
 
-## 💾 // PATCH_NOTES (System Log)
-
-| [VERSION] | [BUILD] | [CHANGELOG] |
-| :--- | :--- | :--- |
-| **v2.5.0** | `STABLE` | **[CURRENT]** Hybrid Search + Market Intelligence + UI Glassmorphism. |
-| **v2.1.0** | `BETA` | Added "Drug Interaction" logic gate. |
-| **v2.0.0** | `ALPHA` | Migrated from OpenAI to Gemini 2.5 Vision. |
-| **v1.0.0** | `LEGACY` | Initial release. Text-only search. (Deprecated). |
-
----
-
 ## 🚀 // DEPLOYMENT_SEQUENCE
 
 Ref: `Protocol_Local_Host`
