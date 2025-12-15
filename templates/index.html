@@ -672,6 +672,14 @@
       }
     }
 
+    /* === Global Reset === */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      /* Critical for layout arithmetic */
+    }
+
     /* === Mobile Responsiveness === */
     @media (max-width: 768px) {
       html {
@@ -679,29 +687,53 @@
         /* Reset base scale for mobile */
       }
 
+      body {
+        padding: 20px 0;
+        /* Remove side padding from body, handle in stage */
+        overflow-x: hidden;
+        /* Prevent scroll overflow */
+      }
+
       .stage {
+        width: 100%;
         padding: 0 16px;
-        gap: 32px;
+        /* Safe gutters */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100vw;
+        /* Hard limit */
       }
 
       #mainForm {
+        width: 100%;
         gap: 20px;
       }
 
       h1 {
-        font-size: 3rem;
-        /* Still big, but manageable */
+        font-size: 2.8rem;
+        /* Adjusted for cleaner wrap */
         line-height: 1.1;
+        padding: 0 10px;
+        /* Prevent text touching edge */
+      }
+
+      /* Force elements to fit inside padded stage */
+      .search-hero,
+      .upload-plate {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
       }
 
       .search-hero input {
         font-size: 16px !important;
-        /* Prevent iOS zoom */
         padding: 16px 20px 16px 50px !important;
       }
 
       .upload-plate {
-        padding: 40px 20px;
+        padding: 30px 20px;
+        /* Reduced internal padding */
       }
     }
   </style>
