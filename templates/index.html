@@ -205,21 +205,32 @@
 
     /* === Global Scaling for 100% Zoom === */
     html {
-      font-size: 20px;
-      /* Increased to 20px for "Zoomed" feel */
+      font-size: 22px;
+      /* Huge Base Scale */
     }
 
     /* main stage */
     .stage {
       width: 100%;
-      max-width: 1200px;
-      /* Wider container */
+      max-width: 1400px;
+      /* Grand Container */
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 50px;
+      /* Big Gap for Header */
       align-items: center;
       margin: 0 auto;
       flex-grow: 1;
+    }
+
+    /* Form Layout - Critical for Gap */
+    #mainForm {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      /* Explicit spacing between Search & Upload */
+      width: 100%;
+      align-items: center;
     }
 
     h1 {
@@ -242,11 +253,19 @@
     /* Harmonized Search Bar (Matches Card Style) */
     .search-hero {
       width: 100%;
-      max-width: 800px;
-      /* Exact match with card */
+      max-width: 1000px;
+      /* Grand Width */
       margin: 0 auto;
       position: relative;
       z-index: 10;
+    }
+
+    /* Ensure Card Matches Search Bar Width */
+    .upload-plate {
+      width: 100%;
+      max-width: 1000px;
+      /* Grand Width */
+      margin: 0 auto;
     }
 
     .search-hero input {
