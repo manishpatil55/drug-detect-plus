@@ -5,17 +5,25 @@
   </a>
 
   <br />
-  <br />
 
-# // DRUG_DETECT_AI_V2 ⚡️
+```text
+██████╗ ██████╗ ██╗   ██╗ ██████╗    ██████╗ ███████╗████████╗███████╗ ██████╗████████╗
+██╔══██╗██╔══██╗██║   ██║██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝
+██║  ██║██████╔╝██║   ██║██║  ███╗   ██║  ██║█████╗     ██║   █████╗  ██║        ██║   
+██║  ██║██╔══██╗██║   ██║██║   ██║   ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
+██████╔╝██║  ██║╚██████╔╝╚██████╔╝   ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
+╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
+```
 
-> `[SYSTEM STATUS: ONLINE]` • `[PROTOCOL: HYBRID_SEARCH]`
+# // NEURAL_INTERFACE_V2 ⚡️
+
+> `[SYSTEM STATUS: ONLINE]` • `[PROTOCOL: HYBRID_SEARCH]` • `[SECURITY: ACTIVE]`
 
 <a href="https://drug-detect-plus.vercel.app/">
   <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-SUCCESS-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
 <a href="https://github.com/manishpatil55/drug-detect-plus/issues">
-  <img src="https://img.shields.io/badge/DEBUG_MODE-ACTIVE-red?style=for-the-badge&logo=github&logoColor=white" />
+  <img src="https://img.shields.io/badge/HEURISTICS-OPTIMAL-blueviolet?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
@@ -46,7 +54,33 @@
 
 ---
 
-## ⚡ [02] PERFORMANCE_METRICS
+## 🔮 [02] NEURAL_DATA_PATHWAY
+
+A visual breakdown of the inference pipeline:
+
+```mermaid
+graph TD
+    A[User Input] -->|Image Upload| B(OCR + Object Detection)
+    A -->|Text Query| C(Intent Normalization)
+    B --> D{Gemini 2.5 Cortex}
+    C --> D
+    
+    D -->|Identify Drug| E[Knowledge Graph Lookup]
+    E --> F[Safety Check Protocol]
+    F -->|Safe| G[Generate Report]
+    F -->|Warning| H[Alert: Contraindication]
+    
+    G --> I[Output: Dosage/Usage]
+    G --> J[Output: Buy Links]
+    H --> K[Output: Medical Warning]
+    
+    style D fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style K fill:#ff5555,stroke:#333,stroke-width:2px,color:white
+```
+
+---
+
+## ⚡ [03] PERFORMANCE_METRICS
 
 ```yaml
 System_Specs:
@@ -59,7 +93,7 @@ System_Specs:
 
 ---
 
-## 🛠️ [03] ARCHITECTURE_STACK
+## 🛠️ [04] ARCHITECTURE_STACK
 
 We operate on a **Zero-Bloat Protocol**.
 
@@ -72,21 +106,9 @@ We operate on a **Zero-Bloat Protocol**.
 *   **[FAILOVER]**: `Key_Rotation_Matrix`
     *   *Why?* If `Key_01` = `429_EXHAUSTED` -> Auto-Switch to `Key_02`.
 
-### // FILE_TREE_VISUALIZATION
-
-```bash
-/ROOT
-├── app.py                 # [KERNEL] Neural Logic & Routing
-├── requirements.txt       # [DEPENDENCIES] Library Manifest
-├── .env                   # [VAULT] Encrypted Keys
-├── public/                # [ASSETS] Visual Data
-└── templates/
-    └── index.html         # [HUD] Heads-Up Display (UI)
-```
-
 ---
 
-## 🚀 [04] DEPLOYMENT_SEQUENCE
+## 🚀 [05] DEPLOYMENT_SEQUENCE
 
 Ref: `Protocol_Local_Host`
 
@@ -119,7 +141,7 @@ python app.py
 
 ---
 
-## 📡 [05] DEBUG_MATRIX
+## 📡 [06] DEBUG_MATRIX
 
 | [ERROR_CODE] | [DIAGNOSIS] | [RESOLUTION_PROTOCOL] |
 | :--- | :--- | :--- |
@@ -129,7 +151,7 @@ python app.py
 
 ---
 
-## 👨‍💻 [06] OPERATOR_LOG
+## 👨‍💻 [07] OPERATOR_LOG
 
 **Command**: [Manish Patil](https://github.com/manishpatil55)  
 **Comms**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
@@ -138,5 +160,5 @@ python app.py
 
 <br />
 <div align="center">
-  <code>[END_OF_TRANSMISSION]</code>
+  <code>VERIFICATION_HASH: 0x4D_41_4E_49_53_48</code>
 </div>
