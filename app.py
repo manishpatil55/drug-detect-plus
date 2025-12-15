@@ -3,6 +3,7 @@ import time
 from PIL import Image
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 from flask import Flask, request, render_template, jsonify
 
 # Security Imports
