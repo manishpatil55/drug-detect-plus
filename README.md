@@ -1,37 +1,28 @@
 
 <div align="center">
-  <div style="border: 1px solid rgba(0, 255, 255, 0.2); padding: 20px; border-radius: 20px; background: radial-gradient(circle at center, rgba(0,255,255,0.05) 0%, rgba(0,0,0,0) 70%); box-shadow: 0 0 80px rgba(0, 200, 255, 0.1);">
-    <a href="https://drug-detect-plus.vercel.app/">
-      <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI HUD" width="100%" style="border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);" />
-    </a>
+  <a href="https://drug-detect-plus.vercel.app/">
+    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI HUD" width="100%" style="border-radius: 20px;" />
+  </a>
 
-    <br />
-    <br />
+  <br />
+  <br />
 
-    <h1 style="font-family: monospace; font-size: 3.5rem; text-transform: uppercase; background: linear-gradient(90deg, #00f260, #0575E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px;">
-      // DRUG_DETECT_AI_V2
-    </h1>
+# // DRUG_DETECT_AI_V2 ⚡️
 
-    <p style="font-family: monospace; color: #00f260; font-size: 1.2rem;">
-      [SYSTEM STATUS: ONLINE] • [PROTOCOL: HYBRID_SEARCH]
-    </p>
+> `[SYSTEM STATUS: ONLINE]` • `[PROTOCOL: HYBRID_SEARCH]`
 
-    <br />
+<a href="https://drug-detect-plus.vercel.app/">
+  <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-SUCCESS-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
+</a>
+<a href="https://github.com/manishpatil55/drug-detect-plus/issues">
+  <img src="https://img.shields.io/badge/DEBUG_MODE-ACTIVE-red?style=for-the-badge&logo=github&logoColor=white" />
+</a>
 
-    <div style="display: flex; gap: 10px; justify-content: center;">
-       <a href="https://drug-detect-plus.vercel.app/">
-         <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-SUCCESS-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
-       </a>
-       <a href="https://github.com/manishpatil55/drug-detect-plus/issues">
-         <img src="https://img.shields.io/badge/DEBUG_MODE-ACTIVE-red?style=for-the-badge&logo=github&logoColor=white" />
-       </a>
-    </div>
-  </div>
 </div>
 
 <br />
 
-> [!NOTE]
+> [!CAUTION]
 > **SYSTEM WARNING**: This neural interface is for **informational analysis only**. Do not execute biological intake based solely on algorithmic output. Consult a certified human operator (Doctor).
 
 ---
@@ -51,7 +42,7 @@
 | **VISUAL_CORTEX** | Deciphers pharmaceutical packaging, handwriting, and blister foils. | `Gemini 2.5 Vision` |
 | **LOGIC_GATE** | Analyzes multi-drug inputs for chemical contraindications (Safety Check). | `Chain-of-Thought` |
 | **VECTOR_MAP** | Normalizes fuzzy user intent ("red pill headache") to standardized nomenclature. | `Semantic Matching` |
-| **AUTO_LINK** | Dynamically routes user to the nearest digital dispensary (1mg/Amazon). | `Dynamic URL Gen` |
+| **AUTO_LINK** | Dynamically routes user to the nearest digital dispensary (1mg/Amazon). | `Dynamic Routing` |
 
 ---
 
