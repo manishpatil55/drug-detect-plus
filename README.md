@@ -1,9 +1,3 @@
-
-<div align="center">
-  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface" width="100%" style="border-radius: 20px; border: 1px solid #333;" />
-  <br/><br/>
-</div>
-
 ```text
 ██████╗ ██████╗ ██╗   ██╗ ██████╗    ██████╗ ███████╗████████╗███████╗ ██████╗████████╗
 ██╔══██╗██╔══██╗██║   ██║██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝
@@ -11,7 +5,7 @@
 ██║  ██║██╔══██╗██║   ██║██║   ██║   ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
 ██████╔╝██║  ██║╚██████╔╝╚██████╔╝   ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
 ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
-                                                           [ SYSTEM_VER: 2.0.4-ALPHA ]
+
 ```
 
 <div align="center">
@@ -131,7 +125,44 @@ python app.py
 
 **License**: `CC BY-NC 4.0` (Open Source / Restricted Commercial).
 
-<br />
+---
+
+## 🚨 // ANOMALY_DETECTION_PROTOCOL (Bug Report)
+
+If the system behavior deviates from nominal parameters, follow this reporting sequence:
+
+### [STEP 1] DIAGNOTICS
+*   **Console Log**: Check browser DevTools (F12) for redness.
+*   **Terminal Log**: Check Flask output for `500` or `429` signatures.
+
+### [STEP 2] TRANSMISSION
+Open a new issue on GitHub with the following data packet:
+
+```yaml
+[Target]: Desktop / Mobile
+[Browser]: Chrome / Safari / Edge
+[Error_Signature]: "Internal Server Error"
+[Context]: "Uploaded a 5MB PNG image..."
+```
+
 <div align="center">
+  <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new">
+    <img src="https://img.shields.io/badge/TRANSMIT_DATA_PACKET-CLICK_TO_REPORT-red?style=for-the-badge&logo=github" />
+  </a>
+</div>
+
+<br/>
+<br/>
+
+<div align="center">
+  <h3>[VISUAL_LOG_CAPTURE]</h3>
+  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface Visual" width="100%" style="border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 40px rgba(0, 255, 100, 0.1);" />
+  <br/><br/>
   <code>[END_OF_TRANSMISSION]</code>
+</div>
+
+
+<div align="center">
+  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface" width="100%" style="border-radius: 20px; border: 1px solid #333;" />
+  <br/><br/>
 </div>
