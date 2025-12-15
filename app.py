@@ -152,7 +152,7 @@ def index():
                     "",
                     "(After listing all medicines):",
                     "### ⚠️ Drug Interactions",
-                    "Checking if these medicines can be taken together...",
+                    "If multiple medicines are detected, analyze potential interactions between them. List contraindications if any. If only one medicine is found, state 'Single medicine detected - No interactions to report'.",
                     "",
                     "### ℹ️ Disclaimer",
                     "'Consult a doctor before use.'"
