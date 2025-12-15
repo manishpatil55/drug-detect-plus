@@ -20,11 +20,13 @@
 
 > `[STATUS: ONLINE]` • `[LATENCY: 48ms]` • `[MODE: HYBRID]`
 
+<br/>
+
 <a href="https://drug-detect-plus.vercel.app/">
-  <img src="https://img.shields.io/badge/>>>_INITIATE_SEQUENCE-CLICK_TO_ACTIVATE-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
+  <img src="https://img.shields.io/badge/>>>_ACCESS_MAIN_TERMINAL-CLICK_TO_LAUNCH-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
 <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md">
-  <img src="https://img.shields.io/badge/SIGNAL_INTERCEPTION-OPEN_CHANNEL-ff0055?style=for-the-badge&logo=github&logoColor=white" />
+  <img src="https://img.shields.io/badge/SIGNAL_INTERCEPTION-REPORT_ANOMALY-ff0055?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
@@ -112,6 +114,17 @@ Steps_To_Replicate:
   2. Select Image
   3. Error: '500 Internal Server Error'
 ```
+
+---
+
+## 💾 // PATCH_NOTES (System Log)
+
+| [VERSION] | [BUILD] | [CHANGELOG] |
+| :--- | :--- | :--- |
+| **v2.5.0** | `STABLE` | **[CURRENT]** Hybrid Search + Market Intelligence + UI Glassmorphism. |
+| **v2.1.0** | `BETA` | Added "Drug Interaction" logic gate. |
+| **v2.0.0** | `ALPHA` | Migrated from OpenAI to Gemini 2.5 Vision. |
+| **v1.0.0** | `LEGACY` | Initial release. Text-only search. (Deprecated). |
 
 ---
 
