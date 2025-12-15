@@ -168,38 +168,42 @@
 
     .particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, transparent 70%);
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(200, 255, 255, 0.5) 0%, transparent 70%);
       border-radius: 50%;
-      opacity: 0.25;
-      animation: floatParticle 20s linear infinite;
+      opacity: 0;
+      animation: floatParticle linear infinite;
+    }
+
+    .p-small {
+      width: 2px;
+      height: 2px;
+      opacity: 0.3;
     }
 
     @keyframes floatParticle {
       0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.3;
+        transform: translate(0, 0);
+        opacity: 0;
       }
 
-      25% {
-        transform: translateY(-15px) scale(1.05);
-        opacity: 0.35;
+      20% {
+        opacity: 0.5;
       }
 
       50% {
-        transform: translateY(-30px) scale(0.95);
-        opacity: 0.25;
+        transform: translate(20px, -40px);
+        opacity: 0.2;
       }
 
-      75% {
-        transform: translateY(-45px) scale(1.1);
-        opacity: 0.4;
+      80% {
+        opacity: 0.5;
       }
 
       100% {
-        transform: translateY(-60px) scale(1);
-        opacity: 0.2;
+        transform: translate(-10px, -100px);
+        opacity: 0;
       }
     }
 
@@ -755,14 +759,20 @@
     <div class="orb orb-b"></div>
     <div class="orb orb-c"></div>
   </div>
-  <div class="particle-layer" aria-hidden="true">
-    <div class="particle" style="top:10%; left:20%; animation-delay: 0s;"></div>
-    <div class="particle" style="top:40%; left:80%; animation-delay: 2s;"></div>
-    <div class="particle" style="top:70%; left:60%; animation-delay: 4s;"></div>
-    <div class="particle" style="top:30%; left:40%; animation-delay: 6s;"></div>
-    <div class="particle" style="top:80%; left:10%; animation-delay: 8s;"></div>
-    <div class="particle" style="top:50%; left:90%; animation-delay: 10s;"></div>
-    <div class="particle" style="top:15%; left:65%; animation-delay: 12s;"></div>
+  <div class="particle-layer" id="particleLayer" aria-hidden="true">
+    <!-- More dense, organic particle field -->
+    <div class="particle" style="top:15%; left:15%; animation-duration: 18s; animation-delay: 0s;"></div>
+    <div class="particle" style="top:45%; left:75%; animation-duration: 25s; animation-delay: -5s;"></div>
+    <div class="particle" style="top:75%; left:25%; animation-duration: 22s; animation-delay: -10s;"></div>
+    <div class="particle" style="top:25%; left:65%; animation-duration: 30s; animation-delay: -15s;"></div>
+    <div class="particle" style="top:65%; left:85%; animation-duration: 20s; animation-delay: -2s;"></div>
+    <div class="particle" style="top:85%; left:10%; animation-duration: 28s; animation-delay: -8s;"></div>
+    <div class="particle" style="top:5%; left:90%; animation-duration: 24s; animation-delay: -12s;"></div>
+    <div class="particle" style="top:55%; left:45%; animation-duration: 26s; animation-delay: -4s;"></div>
+    <div class="particle" style="top:35%; left:5%; animation-duration: 21s; animation-delay: -6s;"></div>
+    <div class="particle p-small" style="top:50%; left:50%; animation-duration: 35s;"></div>
+    <div class="particle p-small" style="top:20%; left:30%; animation-duration: 40s;"></div>
+    <div class="particle p-small" style="top:80%; left:80%; animation-duration: 32s;"></div>
   </div>
 
   <div class="stage" role="main" id="stage">
@@ -1080,6 +1090,23 @@
         }, 100);
       }
     });
+    // --- Parallax Effect ---
+    document.addEventListener('mousemove', (e) => {
+      const x = (window.innerWidth - e.pageX) / 50;
+      const y = (window.innerHeight - e.pageY) / 50;
+
+      const layer = document.getElementById('particleLayer');
+      if (layer) {
+        layer.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      const orbs = document.querySelector('.bg-subtle');
+      if (orbs) {
+        // Move orbs slower for depth
+        orbs.style.transform = `translate(${x / 2}px, ${y / 2}px)`;
+      }
+    });
+
   </script>
 </body>
 
