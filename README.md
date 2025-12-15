@@ -5,42 +5,41 @@
 ██║  ██║██╔══██╗██║   ██║██║   ██║   ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
 ██████╔╝██║  ██║╚██████╔╝╚██████╔╝   ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
 ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
-
 ```
 
 <div align="center">
 
-> `[STATUS: OPERATIONAL]` • `[PROTOCOL: HYBRID_CORTEX]` • `[UPTIME: 99.9%]`
+> `[STATUS: ONLINE]` • `[PROTOCOL: HYBRID_CORTEX]` • `[UPTIME: 99.9%]`
 
 <a href="https://drug-detect-plus.vercel.app/">
-  <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-EXECUTING...-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
+  <img src="https://img.shields.io/badge/INITIATE_LAUNCH-SUCCESS-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
-<a href="https://github.com/manishpatil55/drug-detect-plus/issues">
-  <img src="https://img.shields.io/badge/ANOMALY_REPORT-OPEN_CHANNEL-red?style=for-the-badge&logo=github&logoColor=white" />
+<a href="https://github.com/manishpatil55/drug-detect-plus/issues/new">
+  <img src="https://img.shields.io/badge/REPORT_BUG-OPEN_CHANNEL-red?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
 
 ---
 
-## 📟 // SYSTEM_ARCHITECTURE (Mermaid.js)
+## 📟 // SYSTEM_ARCHITECTURE
 
 ```mermaid
 graph TD
-    A[USER_INPUT] -->|Upload Image| B(VISUAL_CORTEX)
-    A -->|Text Query| C(SEMANTIC_PARSER)
+    A[USER_INPUT] -->|Scan Image| B(VISUAL_CORTEX)
+    A -->|Type Name| C(SEMANTIC_PARSER)
     
-    B -->|Base64 Stream| D{GEMINI_2.5_CORE}
+    B -->|Raw Photons| D{GEMINI_2.5_CORE}
     C -->|Intent Vector| D
     
     D -->|Processing| E[RECOGNITION_ADAPTER]
-    E -->|Lookup| F[PHARMA_DB_LOGIC]
+    E -->|Database| F[PHARMA_LOGIC]
     
     F -->|1. Identify| G[MOLECULE_ID]
-    F -->|2. Safety Check| H[CONTRAINDICATION_SCAN]
-    F -->|3. Supply Chain| I[AFFILIATE_ROUTER]
+    F -->|2. Safety| H[CONTRAINDICATION_SCAN]
+    F -->|3. Supply| I[SMART_LINK_ROUTER]
     
-    G --> J[FINAL_OUTPUT_RENDER]
+    G --> J[FINAL_OUTPUT]
     H --> J
     I --> J
     
@@ -52,36 +51,22 @@ graph TD
 
 ## ⚡ // PERFORMANCE_LOG
 
-> **[CAUTION]**: The following metrics are derived from real-time inference telemetry.
+> **[CAUTION]**: Metrics derived from real-time telemetry.
 
 *   **LATENCY**: `< 800ms` (Global Edge Network)
-*   **ACCURACY**: `98.7%` (OCR Confidence Score)
-*   **FAILOVER**: `Active` (Auto-Rotation Matrix Enforced)
+*   **ACCURACY**: `98.7%` (OCR Confidence)
+*   **FAILOVER**: `Active` (Auto-Rotation Matrix)
 
 ---
 
-## �️ // TECH_STACK_MANIFEST
+## 🛠️ // TECH_STACK
 
-| [COMPONENT] | [SPECIFICATION] | [ROLE] |
+| [MODULE] | [TECH] | [ROLE] |
 | :--- | :--- | :--- |
-| **NEURAL_NET** | `Google Gemini 2.5 Flash` | The cognitive engine processing visual/textual data. |
-| **BACKBONE** | `Python Flask (Stateless)` | The serverless logic layer handling routing & API rotation. |
-| **INTERFACE** | `HTML5 + CSS Glass` | High-performance, hardware-accelerated UI standard. |
-| **DEPLOY** | `Vercel Protocol` | Global content delivery & edge function execution. |
-
----
-
-## 📂 // DIRECTORY_MAP
-
-```bash
-/ROOT_ACCESS
-├── app.py                 # [KERNEL]: Main Logic Circuit
-├── requirements.txt       # [DEPS]: Library Dependencies
-├── .env                   # [VAULT]: Encrypted Keys (Level 5 Clearance)
-├── public/                # [ASSETS]: Visual Data Blocks
-└── templates/
-    └── index.html         # [HUD]: Heads-Up Display Interface
-```
+| **BRAIN** | `Google Gemini 2.5 Flash` | The cognitive engine. Fast. Accurate. |
+| **CORE** | `Python Flask` | Stateless logic. Handles the heavy lifting. |
+| **VIEW** | `Glassmorphism (CSS3)` | Hardware-accelerated UI. No lag. |
+| **CLOUD** | `Vercel Edge` | Deployed globally. |
 
 ---
 
@@ -89,21 +74,21 @@ graph TD
 
 Ref: `Protocol_Local_Host`
 
-### 1. CLONE_REPO
+### 1. CLONE
 ```bash
 git clone https://github.com/manishpatil55/drug-detect-plus.git
 cd drug-detect-plus
 ```
 
-### 2. INSTALL_DEPS
+### 2. INSTALL
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. CONFIG_SECRETS
-Initiate `.env` file in root directory:
+### 3. CONFIG
+Create `.env` file:
 ```ini
-# [CRITICAL]: Add API Keys (Comma Separated for Redundancy)
+# [CRITICAL]: Add API Keys (Comma Separated for Infinite Uptime)
 GEMINI_API_KEY=key_alpha,key_beta,key_gamma
 
 # [CONFIG]: Model Selection
@@ -118,51 +103,32 @@ python app.py
 
 ---
 
+## 👾 // BUG_REPORTING_PROTOCOL
+
+Found a glitch in the matrix?
+
+1.  **Don't Panic.**
+2.  **Screenshot** the anomaly.
+3.  **Open Channel**: [Click Here to Report Issue](https://github.com/manishpatil55/drug-detect-plus/issues/new)
+4.  **Tag It**: `[BUG]` or `[FEATURE_REQUEST]`
+
+---
+
 ## 👨‍💻 // OPERATOR_LOG
 
 **Command**: [Manish Patil](https://github.com/manishpatil55)  
 **Comms**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
 
-**License**: `CC BY-NC 4.0` (Open Source / Restricted Commercial).
+**License**: `CC BY-NC 4.0` (Open Source).
 
----
-
-## 🚨 // ANOMALY_DETECTION_PROTOCOL (Bug Report)
-
-If the system behavior deviates from nominal parameters, follow this reporting sequence:
-
-### [STEP 1] DIAGNOTICS
-*   **Console Log**: Check browser DevTools (F12) for redness.
-*   **Terminal Log**: Check Flask output for `500` or `429` signatures.
-
-### [STEP 2] TRANSMISSION
-Open a new issue on GitHub with the following data packet:
-
-```yaml
-[Target]: Desktop / Mobile
-[Browser]: Chrome / Safari / Edge
-[Error_Signature]: "Internal Server Error"
-[Context]: "Uploaded a 5MB PNG image..."
-```
-
+<br />
 <div align="center">
-  <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new">
-    <img src="https://img.shields.io/badge/TRANSMIT_DATA_PACKET-CLICK_TO_REPORT-red?style=for-the-badge&logo=github" />
-  </a>
-</div>
-
-<br/>
-<br/>
-
-<div align="center">
-  <h3>[VISUAL_LOG_CAPTURE]</h3>
-  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface Visual" width="100%" style="border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 40px rgba(0, 255, 100, 0.1);" />
-  <br/><br/>
   <code>[END_OF_TRANSMISSION]</code>
 </div>
 
+<br/>
 
 <div align="center">
-  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface" width="100%" style="border-radius: 20px; border: 1px solid #333;" />
+  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface" width="100%" style="border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 50px rgba(0,255,200,0.1);" />
   <br/><br/>
 </div>
