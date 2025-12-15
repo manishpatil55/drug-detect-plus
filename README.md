@@ -10,17 +10,22 @@
 ```
 
 <div align="center">
+  <a href="https://drug-detect-plus.vercel.app/">
+    <img src="public/drug-detect-ai.png" alt="Neural Interface" width="100%" style="border-radius: 12px; border: 1px solid #333;" />
+  </a>
+</div>
 
-> `[STATUS: OPERATIONAL]` • `[NET: GLOBAL]` • `[ENCRYPTION: SSL]`
+<br />
+
+<div align="center">
+
+> `[STATUS: ONLINE]` • `[LATENCY: 48ms]` • `[MODE: HYBRID]`
 
 <a href="https://drug-detect-plus.vercel.app/">
   <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-EXECUTING...-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
-<a href="https://github.com/manishpatil55/drug-detect-plus/issues">
-  <img src="https://img.shields.io/badge/ANOMALY_REPORT-OPEN_CHANNEL-red?style=for-the-badge&logo=github&logoColor=white" />
-</a>
-<a href="LICENSE">
-  <img src="https://img.shields.io/badge/LICENSE-CC_BY--NC_4.0-orange?style=for-the-badge" />
+<a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md">
+  <img src="https://img.shields.io/badge/ANOMALY_REPORT-OPEN_CHANNEL-ff0055?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
@@ -29,89 +34,125 @@
 
 ## 📟 // SYSTEM_MANIFEST
 
-**Drug Detect AI** is the **Medical Singularity Engine**. It bridges the analog biology of medicine with the digital precision of Artificial Intelligence.
+**Drug Detect AI** is the **Medical Singularity Engine**. 
+It abandons legacy text-based search for a high-fidelity **Visual Cortex Protocol**. 
 
-We built this because typing "white round pill 500" into a search bar is **archaic**. 
-This system uses **Computer Vision** to extract semantic meaning from raw photons (images) and mapped pharmacology databases.
+We don't "guess". We **decode reality**.
+The system ingests raw photons (packaging images), vectorizes the molecular data, and outputs precise pharmacological intelligence.
 
-### [CORE_OBJECTIVE]
-To provide **Instant**, **Accurate**, and **Actionable** medical intelligence to any human with a camera.
+### 🧬 // CORE_CAPABILITIES
 
----
-
-## ⚙️ // PROCESS_LOGIC (The Brain)
-
-This is how the magic happens. A 4-Stage Pipeline executed in `< 1.2s`.
-
-### 1. CAPTURE & SERIALIZATION
-*   **User Action**: Uploads an image (JPG/PNG).
-*   **System Action**: The frontend grabs the `FileObject`, converts it to a purely binary `Base64` stream, and injects it into the API payload. No local storage, total privacy.
-
-### 2. VISUAL CORTEX ANALYSIS
-*   **Engine**: `Google Gemini 2.5 Vision`
-*   **Task**: The AI performs **Optical Character Recognition (OCR)** on the blister pack text (e.g., "Azithro..."), analyzes the pill shape/color, and reconstructs the full generic name (e.g., "Azithromycin 500mg").
-
-### 3. SEMANTIC SAFETY CHECK
-*   **Engine**: `Chain-of-Thought Logic`
-*   **Task**: If multiple drugs are detected (e.g., 'Drug A' + 'Drug B'), the system simulates their interaction.
-*   **Output**: "SAFE" or "CONTRAINDICATION WARNING".
-
-### 4. DYNAMIC ROUTING
-*   **Engine**: `Affiliate Router`
-*   **Task**: The system generates a geo-specific "Smart Link" to the nearest digital dispensary (1mg, Apollo, Amazon) so the user can acquire the medicine instantly.
-
----
-
-## 🧪 // ANOMALY_DETECTION (Bug Report)
-
-Found a glitch in the matrix? We treat bugs as "Unintended Features" until proven otherwise.
-
-| [SEVERITY] | [DEFINITION] | [PROTOCOL] |
+| [MODULE] | [FUNCTIONALITY] | [TECH_STACK] |
 | :--- | :--- | :--- |
-| **🔴 CRITICAL** | System Crash / 500 Error | [**OPEN PRIORITY ISSUE**](https://github.com/manishpatil55/drug-detect-plus/issues/new) |
-| **🟡 CAUTION** | Incorrect AI Analysis | Submit the Image + Expected Result. |
-| **🔵 COSMETIC** | UI/Visual Glitch | Screenshot it. We'll polish the pixels. |
-
-> **Pro Tip**: When reporting, include your Browser Version (Chrome/Safari) and Device Model.
-
----
-
-## 🛠️ // TECH_STACK_MATRIX
-
-| [LAYER] | [TECHNOLOGY] | [WHY_IT_MATTERS] |
-| :--- | :--- | :--- |
-| **BRAIN** | `Gemini 2.5 Flash Lite` | High speed, low cost, multimodal understanding. |
-| **SPINE** | `Python Flask` | Stateless architecture for infinite horizontal scaling. |
-| **SKIN** | `CSS3 Glassmorphism` | Custom GPU-accelerated shaders for the "Premium" feel. |
-| **HOST** | `Vercel Edge` | Distributed global deployment (Zero latency). |
+| **VISUAL_CORTEX** | Deciphers crumpled foils, handwritten prescriptions, and 3D pill shapes. | `Gemini 2.5 Vision` |
+| **LOGIC_GATE** | Analyzes multi-drug inputs for chemical contraindications (Lethal Check). | `Chain-of-Thought` |
+| **VECTOR_MAP** | Normalizes fuzzy user intent ("red pill headache") to standardized nomenclature. | `Semantic Matching` |
+| **SUPPLY_LINK** | Dynamically routes user to the nearest digital dispensary chain (1mg/Apollo). | `Dynamic Routing` |
 
 ---
 
-## � // INITIALIZATION_SEQUENCE
+## ⚡ // SYSTEM_ARCHITECTURE (Mermaid)
+
+```mermaid
+graph TD
+    A[USER_INPUT] -->|Upload Image| B(VISUAL_CORTEX)
+    A -->|Text Query| C(SEMANTIC_PARSER)
+    
+    B -->|Base64 Stream| D{GEMINI_NEURAL_CORE}
+    C -->|Intent Vector| D
+    
+    D -->|Processing| E[RECOGNITION_ADAPTER]
+    E -->|Lookup| F[PHARMA_LOGIC_LAYER]
+    
+    F -->|1. Identify| G[MOLECULE_ID]
+    F -->|2. Safety Check| H[CONTRAINDICATION_SCAN]
+    F -->|3. Route| I[SMART_DISPENSARY_LINK]
+    
+    G --> J[FINAL_HUD_RENDER]
+    H --> J
+    I --> J
+    
+    style D fill:#00f260,stroke:#333,stroke-width:2px,color:black
+    style I fill:#0575E6,stroke:#333,stroke-width:2px
+```
+
+---
+
+## � // SECURITY_AND_PRIVACY (Zero-Knowledge)
+
+We operate on a **Stateless** protocol. 
+*   **NO_DB**: No database exists. We do not store your queries.
+*   **EPHEMERAL_RAM**: Images are processed in Volatile Memory and wiped instantly.
+*   **METADATA_STRIP**: All EXIF data is sanitized before ingress.
+
+**Your health data is yours. We just process the bits.**
+
+---
+
+## � // ANOMALY_DETECTION (Bug Reporting)
+
+Found a glitch in the matrix?
+We value **System Integrity**. If you encounter a `429` (Resource Exhaustion) or `500` (Kernel Panic), initiate the protocol:
+
+1.  **[CLICK_HERE]** to open an Issue Channel.
+2.  **TAG**: `[BUG]` or `[ENHANCEMENT]`.
+3.  **DEVICE_LOG**: State your Browser Engine (Webkit/Blink/Gecko).
+
+> `[PRIORITY_LEVEL: HIGH]` for all crash reports.
+
+---
+
+## 🚀 // DEPLOYMENT_SEQUENCE
 
 Ref: `Protocol_Local_Host`
 
-1.  **CLONE**: `git clone https://github.com/manishpatil55/drug-detect-plus.git`
-2.  **INSTALL**: `pip install -r requirements.txt`
-3.  **CONFIG**: Create `.env` -> `GEMINI_API_KEY=your_key`
-4.  **IGNITE**: `python app.py`
+### 1. CLONE_REPO
+```bash
+git clone https://github.com/manishpatil55/drug-detect-plus.git
+cd drug-detect-plus
+```
+
+### 2. INJECT_DEPENDENCIES
+```bash
+pip install -r requirements.txt
+```
+
+### 3. CONFIG_VAULT
+Initiate `.env` file in root directory (Level 5 Clearance):
+```ini
+# [CRITICAL]: Add API Keys (Comma Separated for Redundancy)
+GEMINI_API_KEY=key_alpha,key_beta,key_gamma
+
+# [CONFIG]: Model Selection
+GEMINI_MODEL=gemini-2.5-flash-lite
+```
+
+### 4. IGNITE
+```bash
+python app.py
+```
+*System operational at `http://localhost:5000`*
+
+---
+
+## 🖥️ // VISUAL_CONFIRMATION (Interface)
+
+**[CURRENT_BUILD_PREVIEW]:**
+
+<div align="center">
+  <img src="public/drug-detect-preview.png" alt="System Interface Preview" width="100%" style="border-radius: 12px; box-shadow: 0 0 50px rgba(0, 255, 200, 0.1);" />
+</div>
 
 ---
 
 ## 👨‍💻 // OPERATOR_LOG
 
 **Command**: [Manish Patil](https://github.com/manishpatil55)  
-**Signal**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
+**Comms**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
 
 **License**: `CC BY-NC 4.0` (Open Source / Restricted Commercial).
 
----
-
-<br/><br/>
-
+<br />
 <div align="center">
-  <p style="font-family: monospace; opacity: 0.6;">[ VISUAL_CONFIRMATION_DATA ]</p>
-  <img src="public/drug-detect-preview.png" alt="Neural Interface Visual" width="100%" style="border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 -20px 80px rgba(0, 255, 150, 0.1);" />
-  <br/><br/>
   <code>[END_OF_TRANSMISSION]</code>
 </div>
