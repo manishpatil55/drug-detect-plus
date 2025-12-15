@@ -25,7 +25,7 @@
   <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-EXECUTING...-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
 <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md">
-  <img src="https://img.shields.io/badge/ANOMALY_REPORT-OPEN_CHANNEL-ff0055?style=for-the-badge&logo=github&logoColor=white" />
+  <img src="https://img.shields.io/badge/SIGNAL_INTERCEPTION-OPEN_CHANNEL-ff0055?style=for-the-badge&logo=github&logoColor=white" />
 </a>
 
 </div>
@@ -78,7 +78,7 @@ graph TD
 
 ---
 
-## � // SECURITY_AND_PRIVACY (Zero-Knowledge)
+## 🔐 // SECURITY_AND_PRIVACY (Zero-Knowledge)
 
 We operate on a **Stateless** protocol. 
 *   **NO_DB**: No database exists. We do not store your queries.
@@ -89,16 +89,41 @@ We operate on a **Stateless** protocol.
 
 ---
 
-## � // ANOMALY_DETECTION (Bug Reporting)
+## 📡 // SIGNAL_INTERCEPTION (Reporting Protocol)
 
-Found a glitch in the matrix?
-We value **System Integrity**. If you encounter a `429` (Resource Exhaustion) or `500` (Kernel Panic), initiate the protocol:
+Detecting system anomalies is critical for maintaining **99.9% Uptime**. 
 
-1.  **[CLICK_HERE]** to open an Issue Channel.
-2.  **TAG**: `[BUG]` or `[ENHANCEMENT]`.
-3.  **DEVICE_LOG**: State your Browser Engine (Webkit/Blink/Gecko).
+**Initialize a Report** if you encounter **System Failure** (500) or **Resource Lock** (429).
 
-> `[PRIORITY_LEVEL: HIGH]` for all crash reports.
+### 🚨 [SEVERITY_LEVELS]
+
+| Level | Status | Example | Action |
+| :--- | :--- | :--- | :--- |
+| **CRITICAL** | `SYSTEM_DOWN` | App crashes on load. API Key Failure. | [**OPEN PRIORITY TICKET**](https://github.com/manishpatil55/drug-detect-plus/issues/new) |
+| **WARNING** | `PARTIAL_LOSS` | "Drug Interactions" loading slowly. | Submit Issue. |
+| **COSMETIC** | `UI_GLITCH` | Text misalignment. Color artifact. | Submit Issue (Low Priority). |
+
+### 📝 [BUG_REPORT_TEMPLATE]
+
+```yaml
+Current_Status: "System crashed after uploading PNG"
+Device_ID: "iPhone 15 Pro / Safari"
+Steps_To_Replicate:
+  1. Click Upload
+  2. Select Image
+  3. Error: '500 Internal Server Error'
+```
+
+---
+
+## 💾 // PATCH_NOTES (System Log)
+
+| [VERSION] | [BUILD] | [CHANGELOG] |
+| :--- | :--- | :--- |
+| **v2.5.0** | `STABLE` | **[CURRENT]** Hybrid Search + Market Intelligence + UI Glassmorphism. |
+| **v2.1.0** | `BETA` | Added "Drug Interaction" logic gate. |
+| **v2.0.0** | `ALPHA` | Migrated from OpenAI to Gemini 2.5 Vision. |
+| **v1.0.0** | `LEGACY` | Initial release. Text-only search. (Deprecated). |
 
 ---
 
