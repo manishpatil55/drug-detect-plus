@@ -240,33 +240,60 @@
     }
 
     /* Harmonized Search Bar (Matches Card Style) */
+    .search-hero {
+      width: 100%;
+      max-width: 800px !important;
+      /* Widen to match card vibe */
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
     .search-hero input {
-      background: rgba(255, 255, 255, 0.04) !important;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      border-radius: 50px !important;
-      /* Pill Shape */
-      padding: 16px 24px 16px 54px !important;
-      font-size: 18px !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-radius: 20px !important;
+      /* Slightly squarer for "Bar" feel, less "Pill" */
+      padding: 20px 24px 20px 58px !important;
+      font-size: 20px !important;
       color: #fff !important;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .search-hero input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 300;
     }
 
     .search-hero input:focus {
       background: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(255, 255, 255, 0.3) !important;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
-      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Perfect Icon Alignment */
+    .search-icon {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .search-icon svg {
-      opacity: 0.7;
+      width: 24px;
+      height: 24px;
+      opacity: 0.8;
     }
 
 
@@ -720,35 +747,18 @@
       <p class="lead">Smart Medicine Image Analyzer</p>
     </header>
 
-    <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate
-      style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
+    <form id="mainForm" method="POST" enctype="multipart/form-data" novalidate>
 
       <!-- Premium Glass Search Bar -->
-      <div class="search-hero" style="position: relative; width: 100%; max-width: 500px; margin: 0 auto; z-index: 10;">
-        <div class="search-icon"
-          style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.6); pointer-events: none;">
+      <div class="search-hero">
+        <div class="search-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </div>
-        <input type="text" name="text_query" id="textQuery" placeholder="Search medicine name (e.g. Dolo 650)..." style="
-            width: 100%; 
-            padding: 16px 20px 16px 54px; 
-            border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.15); 
-            background: rgba(4, 20, 33, 0.4); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            color: white; 
-            font-size: 16px; 
-            font-weight: 500;
-            outline: none; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-          "
-          onfocus="this.style.borderColor='rgba(100,238,238,0.6)'; this.style.boxShadow='0 0 20px rgba(100,238,238,0.2), inset 0 0 10px rgba(100,238,238,0.05)';"
-          onblur="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.1)';">
+        <input type="text" name="text_query" id="textQuery" placeholder="Search medicine name (e.g. Dolo 650)..."
+          autocomplete="off">
       </div>
 
       <div class="upload-plate" id="uploadPlate" aria-hidden="false">
