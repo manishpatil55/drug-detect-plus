@@ -6,7 +6,6 @@
 ██║  ██║██╔══██╗██║   ██║██║   ██║   ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
 ██████╔╝██║  ██║╚██████╔╝╚██████╔╝   ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
 ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
-                                                           [ SYSTEM_VER: 2.5.0-STABLE ]
 ```
 
 <div align="center">
@@ -22,7 +21,7 @@
 > `[STATUS: ONLINE]` • `[LATENCY: 48ms]` • `[MODE: HYBRID]`
 
 <a href="https://drug-detect-plus.vercel.app/">
-  <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-EXECUTING...-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
+  <img src="https://img.shields.io/badge/>>>_INITIATE_SEQUENCE-CLICK_TO_ACTIVATE-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
 <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md">
   <img src="https://img.shields.io/badge/SIGNAL_INTERCEPTION-OPEN_CHANNEL-ff0055?style=for-the-badge&logo=github&logoColor=white" />
