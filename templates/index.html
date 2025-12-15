@@ -227,8 +227,8 @@
     #mainForm {
       display: flex;
       flex-direction: column;
-      gap: 40px;
-      /* Explicit spacing between Search & Upload */
+      gap: 24px;
+      /* Reduced gap per request */
       width: 100%;
       align-items: center;
     }
@@ -781,8 +781,7 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </div>
-        <input type="text" name="text_query" id="textQuery" placeholder="Search medicine name (e.g. Dolo 650)..."
-          autocomplete="off">
+        <input type="text" name="text_query" id="textQuery" placeholder="Search medicine name..." autocomplete="off">
       </div>
 
       <div class="upload-plate" id="uploadPlate" aria-hidden="false">
