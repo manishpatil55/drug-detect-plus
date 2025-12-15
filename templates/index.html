@@ -92,7 +92,7 @@
       z-index: -2;
       pointer-events: none;
       overflow: hidden;
-      /* filter: blur(120px); -- Removed: Causes clipping artifacts on Safari */
+      filter: blur(120px);
     }
 
     .orb {
@@ -100,19 +100,13 @@
       border-radius: 50%;
       opacity: 0.25;
       mix-blend-mode: screen;
-      filter: blur(80px);
-      /* Apply blur directly to element */
-      transform: translate3d(0, 0, 0);
-      /* Force Hardware Acceleration */
-      will-change: transform;
-      /* Hint to browser */
       animation: floatOrb 60s ease-in-out infinite alternate;
     }
 
     .orb-a {
       width: 480px;
       height: 480px;
-      background: radial-gradient(circle, rgba(0, 255, 255, 0.4), transparent 70%);
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent 60%);
       top: -120px;
       left: -100px;
       animation-delay: 0s;
@@ -121,7 +115,7 @@
     .orb-b {
       width: 620px;
       height: 620px;
-      background: radial-gradient(circle, rgba(0, 180, 180, 0.3), transparent 70%);
+      background: radial-gradient(circle, rgba(0, 180, 180, 0.25), transparent 70%);
       bottom: -200px;
       right: -160px;
       animation-delay: 8s;
@@ -130,7 +124,7 @@
     .orb-c {
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 65%);
       top: 40%;
       left: 60%;
       animation-delay: 16s;
@@ -138,13 +132,12 @@
 
     @keyframes floatOrb {
       0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        /* Updated to 3D */
+        transform: translate(0, 0) scale(1);
         opacity: 0.15;
       }
 
       25% {
-        transform: translate3d(40px, -20px, 0) scale(1.05);
+        transform: translate(40px, -20px) scale(1.05);
         opacity: 0.22;
       }
 
@@ -306,6 +299,26 @@
       border-color: rgba(255, 255, 255, 0.4) !important;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
       /* transform removed per user request */
+    }
+
+    /* === Safari/Chrome Input Reset === */
+    /* Remove default 'clear' (x) button in Safari */
+    input[type="text"]::-webkit-search-decoration,
+    input[type="text"]::-webkit-search-cancel-button,
+    input[type="text"]::-webkit-search-results-button,
+    input[type="text"]::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+      display: none;
+    }
+
+    /* Fix Safari Autofill Yellow Background */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
+      -webkit-text-fill-color: white !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
 
     /* Perfect Icon Alignment */
