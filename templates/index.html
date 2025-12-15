@@ -205,31 +205,38 @@
 
     /* === Global Scaling for 100% Zoom === */
     html {
-      font-size: 18px;
-      /* Increased base size */
+      font-size: 20px;
+      /* Increased to 20px for "Zoomed" feel */
     }
 
     /* main stage */
     .stage {
       width: 100%;
-      max-width: 960px;
+      max-width: 1200px;
       /* Wider container */
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 32px;
       align-items: center;
       margin: 0 auto;
       flex-grow: 1;
     }
 
     h1 {
-      font-size: 72px;
-      /* Bigger Title */
+      font-size: 3.5rem;
+      /* ~70px relative to root */
+      text-align: center;
+      /* Force Center */
+      width: 100%;
     }
 
     p.lead {
-      font-size: 24px;
-      /* Bigger Subtitle */
+      font-size: 1.2rem;
+      /* ~24px */
+      text-align: center;
+      /* Force Center */
+      width: 100%;
+      margin-top: 0;
     }
 
     /* Harmonized Search Bar (Matches Card Style) */
