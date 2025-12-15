@@ -59,13 +59,14 @@ def generate_content_with_rotation(model_name, contents):
         except Exception as e:
             last_error = e
             # Only rotate if it's a Quota/Rate limit error (429)
-            if "429" in str(e):
-                print(f"⚠️ Key {i+1}/{len(api_keys)} exhausted (429). Rotating to next key...")
+            # Check for common Quota/Rate Limit signatures
+            err_str = str(e).lower()
+            if any(x in err_str for x in ["429", "quota", "exhausted", "limit", "resource"]):
+                print(f"⚠️ Key {i+1}/{len(api_keys)} exhausted. Rotating...")
+                time.sleep(1) # Brief pause before next key
                 continue # Try next key
             else:
-                # If it's a model not found or other fatal error, typical retry won't help
-                # UNLESS it's a server error (500), but generic '429' check is safest for quota.
-                # Currently we only catch 429 for rotation.
+                # Fatal error (e.g. invalid argument, auth) -> Fail immediately
                 raise e
 
     # If we exit loop, all keys failed
