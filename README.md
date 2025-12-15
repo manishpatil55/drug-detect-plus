@@ -1,121 +1,128 @@
+
 <div align="center">
   <a href="https://drug-detect-plus.vercel.app/">
-    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI Header" width="100%" style="border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2); border: 1px solid rgba(255,255,255,0.1);" />
+    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI Hero" width="100%" style="border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2); border: 1px solid rgba(255,255,255,0.1);" />
   </a>
 
   <br />
   <br />
 
-  <h1 style="font-size: 3rem; margin: 0;">💊 Drug Detect AI</h1>
-  <p style="font-size: 1.2rem; color: #a0f0f0;"><strong>The Digital Brain for your Medicine Cabinet.</strong></p>
+  <h1 style="font-size: 3rem; font-weight: 900; background: -webkit-linear-gradient(45deg, #00f260, #0575E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    Drug Detect AI ⚡️
+  </h1>
+
+  <p style="font-size: 1.2rem; color: #a0a0a0;">
+    The <strong>Ultimate Medical Intelligence Engine</strong>. Stop Googling symptoms. Just snap a pic.
+  </p>
 
   <p>
-    <a href="https://drug-detect-plus.vercel.app/"><img src="https://img.shields.io/badge/LIVE_DEMO-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
-    <a href="https://github.com/manishpatil55/drug-detect-plus"><img src="https://img.shields.io/github/stars/manishpatil55/drug-detect-plus?style=for-the-badge&color=yellow" alt="Stars" /></a>
-    <a href="#license"><img src="https://img.shields.io/badge/License-CC_BY--NC_4.0-ff69b4?style=for-the-badge" alt="License" /></a>
+    <a href="https://drug-detect-plus.vercel.app/"><strong>🔴 View Live Demo</strong></a> • 
+    <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md"><strong>🐛 Report Bug</strong></a> • 
+    <a href="#-deployment-protocol"><strong>🚀 Deploy</strong></a>
   </p>
-  
-  <p>
-    <img src="https://img.shields.io/badge/AI-Gemini_2.5_Flash-4285F4?style=flat-square&logo=google" />
-    <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python" />
-    <img src="https://img.shields.io/badge/UI-Glassmorphism-00FFFF?style=flat-square" />
+
+  <p align="center">
+    <img src="https://img.shields.io/badge/Production-Live-success?style=for-the-badge&logo=vercel" />
+    <img src="https://img.shields.io/badge/AI-Gemini%202.5%20Flash-blue?style=for-the-badge&logo=google" />
+    <img src="https://img.shields.io/badge/Backend-Flask-lightgrey?style=for-the-badge&logo=flask" />
+    <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange?style=for-the-badge" />
+    <img src="https://img.shields.io/github/stars/manishpatil55/drug-detect-plus?style=for-the-badge&logo=github&color=white" />
   </p>
 </div>
 
 <br />
 
-## ⚡️ What is this?
-**Drug Detect AI** isn't just an image scanner. It's a **Medical Intelligence Engine**. 
-Drop a photo of *any* medicine strip, bottle, or tablet, and our custom-tuned **Gemini 2.5 Flash** agent will deconstruct it instantly. 
-
-We don't just tell you what it is. We tell you **how it works**, **when to take it**, and **where to buy it cheapest**.
-
-> *"It's like having a pharmacist in your pocket, but faster and better looking."*
+> **⚠️ Medical Disclaimer**: This tool is for informational purposes only. It is **not** a doctor. Always consult a professional before taking medication.
 
 ---
 
-## 🔥 The "Ultimate" Feature Stack
+## 🌌 The Vision
 
-### 🧠 **Hybrid Search Engine** (It reads minds)
-- **📸 Vision Mode**: Upload a blurry photo? No problem. The AI reads text, analyzes pill shapes, and decodes packaging color schemes.
-- **⌨️ Text Mode**: Type "red pill for headache" or "Dolo". Our fuzzy-logic engine handles misspellings like a pro.
+We live in 2025. You shouldn't have to decipher illegible doctor handwriting or Google generic symptoms. 
 
-### 💸 **Embedded Market Intelligence** (It makes money)
-- **Auto-Commerce**: The AI doesn't just analyze; it **sells**. It auto-generates deep-links to:
-  - 🟢 **1mg**
-  - 🟠 **Apollo Pharmacy**
-  - 🔵 **Netmeds**
-  - 🟡 **Amazon** (Auto-tagged with *your* Affiliate ID for passive income).
-
-### 🎨 **UI That Breaths** (Glassmorphism)
-- **Zero-Clutter**: A mesmerizing deep-green ambient interface with floating particle physics.
-- **Micro-Interactions**: Hover glows, frosted glass cards, and smooth scaling animations.
-- **Mobile First**: Built for thumbs. Looks native on iOS & Android.
-
-### 🛡️ **Bulletproof Backend** (It never dies)
-- **Smart Key Rotation**: Hit your API limit? The system auto-detects the 429 error and hot-swaps to a backup key in milliseconds. 
-- **Latency Optimized**: Uses the lightweight `gemini-2.5-flash-lite` for sub-second responses.
+**Drug Detect AI** bridges the gap. It's a **Hybrid Search Engine** that scans physical reality (images) and digital queries (text) to give you instant, structured medical intelligence. It’s cleaner than Google, faster than a pharmacist, and looks better than your favorite SaaS.
 
 ---
 
-## 🛠️ The Tech Sauce
+## ⚡️ The Power Grid (Features)
 
-| Layer | Stack | Vibes |
+### 🧠 **Hybrid Core Engine**
+*   **Visual Cortex**: Upload a photo of a strip, bottle, or weird pill. The AI (Gemini 2.5) reverse-engineers it.
+*   **Text Neural Net**: Type "red pill for headache" or "Dolo 650". We handle typos (`dolo 65`), fuzzy logic, and intent detection.
+
+### 🛡️ **Infinity Uptime (Anti-Rate-Limit)**
+*   **Smart Rotation**: We don't just fail when Google says "Stop". The backend holds a pool of API Keys (`Key1`, `Key2`, `Key3`).
+*   **Auto-Switch**: If Key 1 hits the "Lite" tier limit (20 req/day), the system **instantly** hot-swaps to Key 2. Zero downtime.
+
+### 💸 **Revenue Architecture**
+*   **Market Intelligence**: We don't just tell you *what* it is. We tell you **Where to Buy**.
+*   **Affiliate Engine**: Automatically injects tracking tags (e.g., `&tag=drugdetectai-21`) into 1mg, Apollo, and Amazon links. Passive income ready.
+
+### 🎨 **Glassmorphism UI 2.0**
+*   **Aesthetics**: Deep Ambient Green background with floating procedural particles.
+*   **Physics**: Smooth transitions, glowing borders, and backdrop blurs.
+*   **Responsive**: "Grand" on Desktop (1400px), "Native" on Mobile (iPhone optimized).
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Details |
 | :--- | :--- | :--- |
-| **Brain** | Google Gemini 2.5 Flash | ⚡️ Lightning Fast |
-| **Core** | Python (Flask) | 🐍 Rock Solid |
-| **Skin** | HTML5 + CSS3 Variables | 💎 Frosty Glass |
-| **Logic** | Vanilla JS (ES6+) | 🏎️ Zero Bloat |
-| **Deploy** | Vercel Serverless | 🌍 Global Scale |
+| **Brain** | **Google Gemini 2.5** | Flash Lite Model via `google-genai` SDK |
+| **Skeleton** | **Flask (Python)** | Lightweight, stateless, Vercel-compatible |
+| **Skin** | **HTML5 + CSS3** | Custom Glassmorphism, CSS Variables, Flexbox |
+| **Muscles** | **Vanilla JS** | Async Fetch, Client-side Validation, DOM Manipulation |
+| **Hosting** | **Vercel** | Serverless Function Deployment |
 
 ---
 
-## � Get It Running (Speedrun)
+## 🚀 Deployment Protocol
 
-You want this running locally? You got 30 seconds.
+Want to run your own instance? It's easier than making instant noodles.
 
-**1. Clone the repo**
+### 1. Clone & Enter
 ```bash
 git clone https://github.com/manishpatil55/drug-detect-plus.git
 cd drug-detect-plus
 ```
 
-**2. Install the goods**
+### 2. Ignite (Local)
 ```bash
 pip install -r requirements.txt
+python app.py
 ```
 
-**3. Configure your keys**
-Create a `.env` file. Add as many Gemini keys as you want (comma-separated):
-```env
-GEMINI_API_KEY=key_one,key_two,key_three
+### 3. Environment Secrets (`.env`)
+Create a `.env` file. This is your engine room.
+```ini
+# Add as many keys as you want, comma-separated. The app will rotate them.
+GEMINI_API_KEY=key_one,key_two,key_three,key_four
+
+# The Speedster Model
 GEMINI_MODEL=gemini-2.5-flash-lite
 ```
 
-**4. Launch 🚀**
-```bash
-python app.py
-```
-Boom. Open `http://localhost:5000`.
+---
+
+## 🐛 Found a Bug?
+
+We prefer "Unintended Features", but if something actually broke:
+1.  Check the [Issues Tab](https://github.com/manishpatil55/drug-detect-plus/issues).
+2.  Open a **New Issue** with the label `bug`.
+3.  Tell me what browser you used (Safari loves to hate us).
 
 ---
 
-## � License & Rights
+## 👨‍💻 The Architect
 
-**Copyright © 2025 Manish Patil.**
+**Detailed by [Manish Patil](https://github.com/manishpatil55)**.
 
-Licensed under **CC BY-NC 4.0** (Creative Commons Attribution-NonCommercial).
+*   **GitHub**: [@manishpatil55](https://github.com/manishpatil55)
+*   **Mail**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)
 
-✅ **Open Source**: Learn from it. Fork it. Show it off.
-❌ **Non-Commercial**: Don't sell it. Don't rebrand it as a paid product.
-
----
-
+**License**: [CC BY-NC 4.0](LICENSE) (Open Source, Non-Commercial).
+<br />
 <div align="center">
-  <h3>✨ Crafted with precision by <a href="https://github.com/manishpatil55" style="text-decoration: none; color: #00FFFF;">Manish Patil</a> ✨</h3>
-  <p><i>Building the future of Health Tech.</i></p>
-  
-  <a href="mailto:manishpatil55@icloud.com">
-    <img src="https://img.shields.io/badge/Email_Me-000000?style=for-the-badge&logo=icloud&logoColor=white" />
-  </a>
+  <sub>Built with 💻 + ☕️ + 🤖 in 2025.</sub>
 </div>
