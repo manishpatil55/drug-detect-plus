@@ -1,3 +1,4 @@
+
 ```text
 ██████╗ ██████╗ ██╗   ██╗ ██████╗    ██████╗ ███████╗████████╗███████╗ ██████╗████████╗
 ██╔══██╗██╔══██╗██║   ██║██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝
@@ -5,125 +6,136 @@
 ██║  ██║██╔══██╗██║   ██║██║   ██║   ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
 ██████╔╝██║  ██║╚██████╔╝╚██████╔╝   ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
 ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
-                                                           [ SYSTEM_VER: 2.0.4-STABLE ]
+                                                           [ SYSTEM_VER: 2.1.0-STABLE ]
 ```
 
 <div align="center">
 
-> `[STATUS: ONLINE]` • `[PROTOCOL: SECURE]` • `[VISUAL_CORTEX: ACTIVE]`
+> `[STATUS: OPERATIONAL]` • `[PROTOCOL: HYBRID_CORTEX]` • `[LATENCY: 800ms]`
 
 <a href="https://drug-detect-plus.vercel.app/">
-  <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-LAUNCH-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
+  <img src="https://img.shields.io/badge/INITIATE_SEQUENCE-EXECUTING...-00f260?style=for-the-badge&logo=vercel&logoColor=black" />
 </a>
 <a href="https://github.com/manishpatil55/drug-detect-plus/issues">
   <img src="https://img.shields.io/badge/ANOMALY_REPORT-OPEN_CHANNEL-red?style=for-the-badge&logo=github&logoColor=white" />
 </a>
+<img src="https://img.shields.io/badge/LICENSE-CC_BY--NC_4.0-orange?style=for-the-badge" />
 
 </div>
 
 ---
 
-## 📟 // SYSTEM_ARCHITECTURE 
+## 📟 // THE_MEDICAL_SINGULARITY
 
-This is not a simple website. It is a **Bio-Digital Search Engine** engineered to decode physical reality.
+**Drug Detect AI** is the interface between **Physical Reality** and **Digital Intelligence**. 
+
+We live in a post-text world. Why type "white round pill 500mg" when you can show it to the machine? This system utilizes **Gemini 2.5 Vision** (The "Visual Cortex") to perform high-fidelity **OCR and Shape Recognition** on pharmaceutical packaging, turning blurry photos into structured medical data.
+
+**TL;DR:** It's "Shazam for Medicine". Snap a pic -> Get the Molecule -> Find the Cure.
+
+---
+
+## 🧠 // CORTEX_ARCHITECTURE (Mermaid.js Flow)
+
+how the system "thinks" in milliseconds:
 
 ```mermaid
 graph TD
-    A[USER_INPUT] -->|Upload Image| B(VISUAL_CORTEX)
-    A -->|Text Query| C(SEMANTIC_PARSER)
+    User((USER)) -->|Input: Image/Text| Frontend[GLASS_UI]
+    Frontend -->|POST Request| API{FLASK_GATEWAY}
     
-    B -->|Base64 Stream| D{GEMINI_2.5_CORE}
-    C -->|Intent Vector| D
+    API -->|Validation| Check[SECURITY_LAYER]
+    Check -->|Pass| Logic[NEURAL_ENGINE]
     
-    D -->|Processing| E[RECOGNITION_ADAPTER]
-    E -->|Lookup| F[PHARMA_DB_LOGIC]
+    Logic -->|Path A: Vision| VisionModel[GEMINI_2.5_PRO]
+    Logic -->|Path B: Semantic| NLP[INTENT_PARSER]
     
-    F -->|1. Identify| G[MOLECULE_ID]
-    F -->|2. Safety Check| H[CONTRAINDICATION_SCAN]
-    F -->|3. Smart Link| I[ROUTING_PROTOCOL]
+    VisionModel -->|OCR Data| Synthesizer[DATA_SYNTHESIZER]
+    NLP -->|Context| Synthesizer
     
-    G --> J[FINAL_OUTPUT_RENDER]
-    H --> J
-    I --> J
+    Synthesizer -->|1. Identify| Output[MOLECULE_ID]
+    Synthesizer -->|2. Safety| Safety[INTERACTION_CHECK]
+    Synthesizer -->|3. Route| Link[SMART_DISPENSARY]
     
-    style D fill:#00f260,stroke:#333,stroke-width:2px,color:black
-    style I fill:#0575E6,stroke:#333,stroke-width:2px
+    Output --> Client[FINAL_RENDER]
+    Safety --> Client
+    Link --> Client
+    
+    style User fill:#fff,stroke:#333
+    style VisionModel fill:#00f260,stroke:#333,color:black
+    style Link fill:#0575E6,stroke:#333
 ```
 
 ---
 
-## ⚡ // TECHNICAL_DEEP_DIVE
+## ⚡ // DEEP_DIVE: THE_FEATURES
 
-### 1. Visual Cortex (OCR + Object Detection)
-The system uses `Gemini 2.5 Flash Lite` (Vision capabilities) to perform a two-step analysis on every uploaded image:
-*   **Layer 1 (Text Extraction)**: It scans the image for brand names ("Calpol"), salts ("Paracetamol"), and dosage ("500mg"). It works even on crumpled strips or handwritten notes.
-*   **Layer 2 (Shape Recognition)**: It analyzes the pill shape/color to confirm identity (e.g., distinguishing a red capsule from a white tablet).
+### 1. 👁️ The Visual Cortex
+The AI doesn't just "see" the image; it **reads** it.
+*   **OCR (Optical Character Recognition)**: Extracts text from crumpled foils, blurred bottles, and handwritten scripts.
+*   **Shape Analysis**: Identifies pill geometry (Round vs. Oblong) to differentiate generics.
 
-### 2. Semantic Intent Engine
-When you type text, we don't just keyword match. We use **Fuzzy Logic**.
-*   Input: *"red pill for migraine"*
-*   Logic: `Migraine` -> `Vasograin` or `Naproxen`.
-*   Result: Shows the medically appropriate match.
+### 2. 🛡️ The Logic Gate (Safety)
+Most apps just identify. We **Analyze**.
+*   **Interaction Check**: If you upload 3 different medicines, the Logic Gate calculates: *"Does Drug A + Drug B = Danger?"*
+*   **Result**: It generates a simplified warning (e.g., "Avoid Alcohol", "Drowsiness Risk").
 
-### 3. Safety Check Protocol
-Before showing results, the logic gate runs a **Contraindication Scan**.
-*   If multiple drugs are detected (e.g., "Aspirin" + "Ibuprofen"), the system flags a **⚠️ HIGH RISK** interaction warning immediately.
+### 3. 🔗 The Smart Dispensary
+We closed the loop. Information is useless without Action.
+*   **Dynamic Routing**: The system automatically generates deep-links to **1mg, Apollo, and Amazon**.
+*   **Sanitization**: All links are URL-encoded (`Name+Dosage`) so they never 404.
 
----
-
-## 👾 // ANOMALY_REPORTING (Bug Bounty)
-
-Found a glitch in the matrix? We need to patch it. 
-Here is the protocol for submitting a `BUG_REPORT` to the [Issues Channel](https://github.com/manishpatil55/drug-detect-plus/issues).
-
-**Please follow this strict format:**
-
-### [BUG] Title Here
-*   **Browser**: (Chrome / Safari / Firefox)
-*   **Device**: (iPhone 15 / Desktop / Android)
-*   **Behavior**: "I uploaded a PNG and the spinner never stopped."
-*   **Console Log**: (Press F12 -> Console -> Paste Red Text here)
-
-> **Priority Levels**:
-> *   🔴 **CRITICAL**: App crashed / White screen.
-> *   🟡 **MAJOR**: Wrong medicine identified.
-> *   🟢 **MINOR**: CSS alignment / Typos.
+### 4. 🔄 Zero-Downtime Protocol
+*   **The Issue**: AI APIs have rate limits (e.g., 15 req/min).
+*   **The Fix**: **Round-Robin Key Rotation**.
+*   The backend holds a `Pool[Key1, Key2, Key3]`. If `Key1` dies (429 Error), the system **hot-swaps** to `Key2` instantly. The user never notices.
 
 ---
 
-## 🛠️ // TECH_STACK_MANIFEST
+## 👾 // ANOMALY_REPORTING (Bugs)
 
-| [COMPONENT] | [SPECIFICATION] | [ROLE] |
-| :--- | :--- | :--- |
-| **NEURAL_NET** | `Google Gemini 2.5 Flash` | The cognitive engine processing visual/textual data. |
-| **BACKBONE** | `Python Flask (Stateless)` | The serverless logic layer handling routing & API rotation. |
-| **INTERFACE** | `HTML5 + CSS Glass` | High-performance, hardware-accelerated UI standard. |
-| **DEPLOY** | `Vercel Protocol` | Global content delivery & edge function execution. |
+If the system crashes, don't panic. Follow the **Debug Protocol**:
+
+### [Level 1]: Infinite Loading Spin 🔄
+*   **Diagnosis**: usually a network disconnect or cold boot.
+*   **Fix**: Refresh the page. Vercel functions sleep when idle; give it 5 seconds to wake up.
+
+### [Level 2]: "Internal Server Error" ⚠️
+*   **Diagnosis**: The AI rejected the image format (e.g., HEIC/WebP).
+*   **Fix**: Try a standard **JPG** or **PNG**.
+
+### [Level 3]: "Limit Reached" 🛑
+*   **Diagnosis**: All API keys in the pool are exhausted.
+*   **Fix**: [Open an Issue](https://github.com/manishpatil55/drug-detect-plus/issues) so we can refill the `Key_Vault`.
+
+**Found a new bug?**
+1.  Screenshot the error.
+2.  Copy the browser console logs (`F12` -> `Console`).
+3.  [**Submit Report Here**](https://github.com/manishpatil55/drug-detect-plus/issues/new)
 
 ---
 
-## � // DEPLOYMENT_SEQUENCE
+## 🛠️ // INITIALIZATION_SEQUENCE (Deploy)
 
-Ref: `Protocol_Local_Host`
+Want your own private instance?
 
-### 1. CLONE_REPO
+### 1. CLONE
 ```bash
 git clone https://github.com/manishpatil55/drug-detect-plus.git
 cd drug-detect-plus
 ```
 
-### 2. INSTALL_DEPS
+### 2. INJECT
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. CONFIG_SECRETS
-Initiate `.env` file in root directory:
+### 3. CONFIGURE (`.env`)
 ```ini
-# [CRITICAL]: Add API Keys (Comma Separated for Redundancy)
+# REDUNDANCY LAYER: Add keys comma-separated
 GEMINI_API_KEY=key_alpha,key_beta,key_gamma
 
-# [CONFIG]: Model Selection
+# CORE MODEL
 GEMINI_MODEL=gemini-2.5-flash-lite
 ```
 
@@ -131,22 +143,25 @@ GEMINI_MODEL=gemini-2.5-flash-lite
 ```bash
 python app.py
 ```
-*System operational at `http://localhost:5000`*
+*System operational at port `:5000`*
 
 ---
 
 ## 👨‍💻 // OPERATOR_LOG
 
-**Command**: [Manish Patil](https://github.com/manishpatil55)  
-**Comms**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
+**Architect**: [Manish Patil](https://github.com/manishpatil55)  
+**Signal**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)  
 
-**License**: `CC BY-NC 4.0` (Open Source / Restricted Commercial).
+**License**: `CC BY-NC 4.0`
+*   **Open Access**: Yes.
+*   **Commercial Use**: Restricted.
+*   **Modification**: Permitted with Credit.
 
----
+<br />
 
 <div align="center">
-  <p><strong>[ VISUAL_INTERFACE_PREVIEW ]</strong></p>
-  <img src="public/drug-detect-preview.png" alt="System Interface Preview" width="100%" style="border-radius: 20px; border: 1px solid #333; box-shadow: 0 0 50px rgba(0, 255, 200, 0.1);" />
+  <h3 style="font-family: monospace;">// VISUAL_CONFIRMATION</h3>
+  <img src="public/drug-detect-ai.jpeg" alt="Neural Interface Preview" width="100%" style="border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 50px rgba(0, 255, 200, 0.1);" />
   <br/><br/>
-  <code>[END_OF_TRANSMISSION]</code>
+  <sub>[END_OF_TRANSMISSION]</sub>
 </div>
