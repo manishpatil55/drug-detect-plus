@@ -1,128 +1,135 @@
 
 <div align="center">
   <a href="https://drug-detect-plus.vercel.app/">
-    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI Hero" width="100%" style="border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2); border: 1px solid rgba(255,255,255,0.1);" />
+    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI Hero" width="100%" style="border-radius: 24px; box-shadow: 0 20px 80px rgba(0, 255, 230, 0.15); border: 1px solid rgba(255,255,255,0.08);" />
   </a>
 
   <br />
   <br />
 
-  <h1 style="font-size: 3rem; font-weight: 900; background: -webkit-linear-gradient(45deg, #00f260, #0575E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+  <h1 style="font-size: 3.5rem; font-weight: 900; letter-spacing: -2px; background: -webkit-linear-gradient(0deg, #e3ffe7, #d9e7ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(200,255,255,0.3));">
     Drug Detect AI ⚡️
   </h1>
 
-  <p style="font-size: 1.2rem; color: #a0a0a0;">
-    The <strong>Ultimate Medical Intelligence Engine</strong>. Stop Googling symptoms. Just snap a pic.
+  <p style="font-size: 1.3rem; font-weight: 500; color: #a4b5b5; max-width: 600px; margin: 0 auto 30px;">
+    The <strong>Medical Singularity Engine</strong>. <br/>
+    Stop guessing. Just snap a pic.
   </p>
 
-  <p>
-    <a href="https://drug-detect-plus.vercel.app/"><strong>🔴 View Live Demo</strong></a> • 
-    <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new?template=bug_report.md"><strong>🐛 Report Bug</strong></a> • 
-    <a href="#-deployment-protocol"><strong>🚀 Deploy</strong></a>
+  <p style="display: flex; gap: 15px; justify-content: center; align-items: center;">
+    <a href="https://drug-detect-plus.vercel.app/" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: white; text-decoration: none; font-weight: 600; transition: all 0.3s;">🔴 View Live Demo</a>
+    <a href="https://github.com/manishpatil55/drug-detect-plus/issues/new" style="background: rgba(255,255,255,0.05); padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); color: #ccc; text-decoration: none; font-weight: 600;">🐛 Report Bug</a>
   </p>
 
-  <p align="center">
-    <img src="https://img.shields.io/badge/Production-Live-success?style=for-the-badge&logo=vercel" />
-    <img src="https://img.shields.io/badge/AI-Gemini%202.5%20Flash-blue?style=for-the-badge&logo=google" />
-    <img src="https://img.shields.io/badge/Backend-Flask-lightgrey?style=for-the-badge&logo=flask" />
-    <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange?style=for-the-badge" />
-    <img src="https://img.shields.io/github/stars/manishpatil55/drug-detect-plus?style=for-the-badge&logo=github&color=white" />
+  <br />
+
+  <p align="center" style="opacity: 0.8;">
+    <img src="https://img.shields.io/badge/System-Online-success?style=for-the-badge&logo=vercel&logoColor=white&color=000000" />
+    <img src="https://img.shields.io/badge/Intelligence-Gemini%202.5-blue?style=for-the-badge&logo=google&logoColor=white&color=0066cc" />
+    <img src="https://img.shields.io/badge/Core-Flask-lightgrey?style=for-the-badge&logo=flask&logoColor=white&color=333333" />
+    <img src="https://img.shields.io/github/stars/manishpatil55/drug-detect-plus?style=for-the-badge&logo=github&color=black" />
   </p>
 </div>
 
 <br />
 
-> **⚠️ Medical Disclaimer**: This tool is for informational purposes only. It is **not** a doctor. Always consult a professional before taking medication.
+> **⚠️ Disclaimer**: This is an AI Research Tool, not a biological doctor. Always verify with a certified medical professional.
 
 ---
 
 ## 🌌 The Vision
 
-We live in 2025. You shouldn't have to decipher illegible doctor handwriting or Google generic symptoms. 
+We live in a post-text world. You shouldn't have to decipher messy prescriptions or type vaguely into Google. **Drug Detect AI** is the interface between **Physical Reality** (Medicine) and **Digital Intelligence** (Data).
 
-**Drug Detect AI** bridges the gap. It's a **Hybrid Search Engine** that scans physical reality (images) and digital queries (text) to give you instant, structured medical intelligence. It’s cleaner than Google, faster than a pharmacist, and looks better than your favorite SaaS.
-
----
-
-## ⚡️ The Power Grid (Features)
-
-### 🧠 **Hybrid Core Engine**
-*   **Visual Cortex**: Upload a photo of a strip, bottle, or weird pill. The AI (Gemini 2.5) reverse-engineers it.
-*   **Text Neural Net**: Type "red pill for headache" or "Dolo 650". We handle typos (`dolo 65`), fuzzy logic, and intent detection.
-
-### 🛡️ **Infinity Uptime (Anti-Rate-Limit)**
-*   **Smart Rotation**: We don't just fail when Google says "Stop". The backend holds a pool of API Keys (`Key1`, `Key2`, `Key3`).
-*   **Auto-Switch**: If Key 1 hits the "Lite" tier limit (20 req/day), the system **instantly** hot-swaps to Key 2. Zero downtime.
-
-### 💸 **Revenue Architecture**
-*   **Market Intelligence**: We don't just tell you *what* it is. We tell you **Where to Buy**.
-*   **Affiliate Engine**: Automatically injects tracking tags (e.g., `&tag=drugdetectai-21`) into 1mg, Apollo, and Amazon links. Passive income ready.
-
-### 🎨 **Glassmorphism UI 2.0**
-*   **Aesthetics**: Deep Ambient Green background with floating procedural particles.
-*   **Physics**: Smooth transitions, glowing borders, and backdrop blurs.
-*   **Responsive**: "Grand" on Desktop (1400px), "Native" on Mobile (iPhone optimized).
+It uses **Computer Vision** to read the molecular identity of drugs and instant **Semantic Search** to tell you exactly:
+1.  **What it is.**
+2.  **What it does.**
+3.  **Where to get it.**
 
 ---
 
-## 🛠️ Tech Stack
+## ⚡️ The Core Architecture
 
-| Layer | Technology | Details |
+### 🧠 **Hybrid Cortex (Gemini 2.5)**
+*   **Visual Recognition**: Upload a photo. The AI performs OCR and shape recognition to identify the medicine, even from crumpled strips.
+*   **Semantic Neural Net**: Type "red pill for migraine". The engine uses fuzzy logic to detect intent and map symptoms to standard pharmacology.
+
+### 🔗 **Smart Dispensary Link**
+*   **Direct Connect**: The system doesn't just analyze; it **acts**. It automatically generates deep links to **1mg, Apollo, Netmeds, and Amazon**.
+*   **Auto-Correction**: Medicine names are URL-encoded and sanitized instantly so links never break.
+
+### 🛡️ **Zero-Downtime Protocol**
+*   **Key Rotation**: The backend maintains a redundant array of API keys.
+*   **Failover Logic**: If Google's API throttles Key 1 (429 Error), the system **seamlessly hot-swaps** to Key 2 in milliseconds. The user never sees an error.
+
+### 💎 **Glassmorphism 2.0 Interface**
+*   **The Vibe**: Deep Sub-Oceanic Green ambient background with real-time particle physics.
+*   **Material Physics**: Elements use `backdrop-filter: blur(20px)` for that "Frosted Glass" Apple-esque aesthetic.
+*   **Adaptive Layout**: Fluidly reshapes from a Grand Desktop Dashboard (1400px) to a Native Mobile App feel.
+
+---
+
+## 🛠️ The Stack
+
+| Layer | Tech | Role |
 | :--- | :--- | :--- |
-| **Brain** | **Google Gemini 2.5** | Flash Lite Model via `google-genai` SDK |
-| **Skeleton** | **Flask (Python)** | Lightweight, stateless, Vercel-compatible |
-| **Skin** | **HTML5 + CSS3** | Custom Glassmorphism, CSS Variables, Flexbox |
-| **Muscles** | **Vanilla JS** | Async Fetch, Client-side Validation, DOM Manipulation |
-| **Hosting** | **Vercel** | Serverless Function Deployment |
+| **Intelligence** | **Gemini 2.5 Flash** | The Brain. Fast, low-latency, high-accuracy. |
+| **backbone** | **Python Flush** | Stateless serverless architecture. |
+| **Visuals** | **CSS3 Glass** | Custom shader-like styles with no frameworks. |
+| **Logic** | **Vanilla JS** | Lightweight client-side hydration. |
+| **Cloud** | **Vercel** | Edge-ready deployment. |
 
 ---
 
-## 🚀 Deployment Protocol
+## 🚀 Initialize Protocol (Setup)
 
-Want to run your own instance? It's easier than making instant noodles.
+Want to deploy your own instance?
 
-### 1. Clone & Enter
+### 1. Clone
 ```bash
 git clone https://github.com/manishpatil55/drug-detect-plus.git
 cd drug-detect-plus
 ```
 
-### 2. Ignite (Local)
+### 2. Install
 ```bash
 pip install -r requirements.txt
-python app.py
 ```
 
-### 3. Environment Secrets (`.env`)
-Create a `.env` file. This is your engine room.
+### 3. Environment Config (`.env`)
+Create a `.env` file to fuel the engine:
 ```ini
-# Add as many keys as you want, comma-separated. The app will rotate them.
-GEMINI_API_KEY=key_one,key_two,key_three,key_four
+# Add multiple keys for maximum reliability (comma separated)
+GEMINI_API_KEY=key_one,key_two,key_three
 
-# The Speedster Model
+# The chosen model
 GEMINI_MODEL=gemini-2.5-flash-lite
 ```
 
----
-
-## 🐛 Found a Bug?
-
-We prefer "Unintended Features", but if something actually broke:
-1.  Check the [Issues Tab](https://github.com/manishpatil55/drug-detect-plus/issues).
-2.  Open a **New Issue** with the label `bug`.
-3.  Tell me what browser you used (Safari loves to hate us).
+### 4. Launch
+```bash
+python app.py
+```
 
 ---
 
-## 👨‍💻 The Architect
+## 🔮 Roadmap 2026
+
+*   **Voice Synthesis**: The AI will "speak" the dosage instructions to you.
+*   **AR Overlay**: Point your camera at a shelf, and we highlight the safe medicines.
+*   **Biometric History**: Secure, encrypted log of your past scans locally on-device.
+
+---
+
+## 👨‍💻 Architect
 
 **Detailed by [Manish Patil](https://github.com/manishpatil55)**.
 
 *   **GitHub**: [@manishpatil55](https://github.com/manishpatil55)
-*   **Mail**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)
+*   **Connect**: [manishpatil55@icloud.com](mailto:manishpatil55@icloud.com)
+*   **License**: [CC BY-NC 4.0](LICENSE) (Open Source).
 
-**License**: [CC BY-NC 4.0](LICENSE) (Open Source, Non-Commercial).
 <br />
 <div align="center">
-  <sub>Built with 💻 + ☕️ + 🤖 in 2025.</sub>
+  <sub>Engineered for the Future. 🌌</sub>
 </div>
