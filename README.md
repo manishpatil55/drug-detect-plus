@@ -1,130 +1,130 @@
-<a href="https://drug-detect-plus.vercel.app/">
-  <img 
-    src="public/drug-detect-ai.jpeg"
-    alt="Drug Detect++ Preview"
-    width="100%"
-    style="border-radius: 12px; box-shadow: 0 0 25px rgba(0, 200, 200, 0.2);"
-  />
-</a>
 
+<div align="center">
+  <a href="https://drug-detect-plus.vercel.app/">
+    <img src="public/drug-detect-ai.jpeg" alt="Drug Detect AI - Smart Medicine Analyzer" width="100%" style="border-radius: 16px; box-shadow: 0 8px 30px rgba(0, 150, 150, 0.3); border: 1px solid rgba(255,255,255,0.1);" />
+  </a>
 
-# 💊 Drug Detect AI — Smart Medicine Image Analyzer
+  <br />
+  <br />
 
-> AI-powered tool that identifies medicines just by their image.  
-> Upload a medicine photo, and the AI tells you what it is, how it's used, dosage info, and more — powered by **Google Gemini AI**.
+  <h1>💊 Drug Detect AI</h1>
+  <p class="lead"><strong>Smart Medicine Analyzer with Hybrid Search & Market Intelligence</strong></p>
+
+  <p>
+    <a href="https://drug-detect-plus.vercel.app/"><strong>View Live Demo</strong></a> • 
+    <a href="#-setup-guide"><strong>Deploy Your Own</strong></a> • 
+    <a href="#-license"><strong>License</strong></a>
+  </p>
+  
+  <p align="center">
+    <img src="https://img.shields.io/badge/Status-Production-success?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/AI-Gemini%202.5%20Flash-blue?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange?style=for-the-badge" />
+  </p>
+</div>
 
 ---
 
-## 🚀 Features
+## 🚀 Overview
 
-- 🧠 **AI-Powered Analysis** — Uses Gemini AI to detect and describe medicines from images  
-- 🖼️ **Image Upload Support** — Upload or drag-and-drop medicine photos  
-- ⚡ **Instant Results** — Get AI responses with uses, dosage, and details  
-- 💾 **Smart Preview Persistence** — Keeps your uploaded image visible even after reload  
-- 🪄 **Modern UI** — Glassmorphic, animated background with glowing waves & orbs  
-- 📱 **Responsive Design** — Works smoothly on desktop and mobile
+**Drug Detect AI** is an advanced medical intelligence tool that allows users to identify medicines via **Image Upload** or **Text Search**. Powered by **Google Gemini 2.5 Flash**, it provides instant, detailed breakdowns of medicine usage, dosage, side effects, and mechanism of action.
+
+Unlike standard analyzers, this tool features **Market Intelligence**: it automatically generates direct "Where to Buy" links for top pharmacies (1mg, Apollo, Netmeds, Amazon) and checks for potential drug interactions.
+
+---
+
+## ✨ Key Features
+
+### 🔍 Hybrid Search Engine
+- **Image Analysis**: Upload a photo of a strip, bottle, or tablet. The AI reads text, shapes, and colors to identify the drug.
+- **Smart Text Search**: Type a name (e.g., "Dolo 650") or a symptom (e.g., "headache medicine"). Handles typos and fuzzy matching automatically.
+
+### 🧠 Advanced Medical Insights
+- **Structured Data**: Returns a clean **Table View** of Uses, Dosage, Mechanism, and Side Effects.
+- **Drug Interactions**: If multiple medicines are visible, it warns about potentially dangerous combinations.
+- **Multi-Language Support**: Capable of analyzing generic names and local brands.
+
+### 💸 Monetization & Affiliate Ready
+- **Buy Buttons**: Automatically generates direct search links for **1mg, Apollo Pharmacy, Netmeds, and Amazon**.
+- **Affiliate Integration**: Built-in support for Amazon Affiliate tags (configurable).
+
+### 🎨 Premium UI/UX ("Glassmorphism")
+- **Visuals**: Deep green ambient aesthetic with flowing particle backgrounds.
+- **Responsive**: Fully optimized for Mobile (iOS/Android) and Desktop.
+- **Interaction**: Micro-animations, pill-shaped glass buttons, and smooth loading states.
+
+### 🛡️ Enterprise-Grade Reliability
+- **API Key Rotation**: Backend automatically cycles through multiple API keys to handle rate limits (Quota Management).
+- **Robust Error Handling**: Catches "Resource Exhausted" errors and retries seamlessly.
 
 ---
 
 ## 🧩 Tech Stack
 
-| Category | Technologies Used |
-|-----------|-------------------|
-| Frontend | HTML5, CSS3 (Custom UI, Glassmorphism, Animations), JavaScript |
-| Backend | Python (Flask / FastAPI based) |
-| AI Model | Google Gemini 2.0 Flash |
-| Hosting Ready | Works locally or can be deployed on Vercel / Render / Replit |
-| Extras | LocalStorage preview save, smooth scroll animations, copy-to-clipboard |
+| Component | Technology |
+|:--- |:--- |
+| **Frontend** | HTML5, CSS3 (Custom Glassmorphism), Vanilla JS |
+| **Backend** | Python (Flask), Werkzeug |
+| **AI Core** | Google Gemini 2.5 Flash Lite (via `google-genai` SDK) |
+| **Monetization** | Dynamic Affiliate Link Generation |
+| **Deployment** | Vercel (Python Runtime) |
 
 ---
 
 ## ⚙️ Setup Guide
 
-### 1️⃣ Clone this repo
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/manishpatil55/drug-detect-plus.git
 cd drug-detect-plus
 ```
 
-2️⃣ Create a virtual environment (optional but recommended)
-```bash
-python3 -m venv .venv
-source .venv/bin/activate   # (Mac/Linux)
-```
-```bash
-.venv\Scripts\activate      # (Windows)
-```
-
-3️⃣ Install dependencies
+### 2️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-4️⃣ Create a .env file in the project root
-
-Add your Gemini API key and model here 👇
-You can get your Gemini API key from Google AI Studio.
+### 3️⃣ Configure Environment
+Create a `.env` file in the root directory:
 ```bash
-GEMINI_API_KEY=your_api_key_here
-GEMINI_MODEL=gemini-2.0-flash
+# Comma-separated keys for auto-rotation/reliability
+GEMINI_API_KEY=your_key_1,your_key_2,your_key_3
+
+# AI Model (Optimized for Speed/Cost)
+GEMINI_MODEL=gemini-2.5-flash-lite
 ```
 
-5️⃣ Run the app
+### 4️⃣ Run Locally
 ```bash
 python app.py
 ```
-
-Then open your browser and go to:
-```bash
-http://localhost:5000
-```
+Visit `http://localhost:5000` in your browser.
 
 ---
 
-## 🧠 How It Works
-   - You upload a photo of a medicine 📸
-	- The backend sends the image to Gemini AI via your API key 🤖
-	- Gemini analyzes and identifies the medicine 💊
-	- The app shows:
-   - Medicine Name
-   - Uses and Composition
-   - Dosage Info
-   - Side Effects (if applicable)
-   - External link suggestions for ordering
+## 📜 License
+
+**Copyright © 2025 Manish Patil.**
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+
+✅ **You CAN**:
+- **Share**: Copy and redistribute the material in any medium or format.
+- **Adapt**: Remix, transform, and build upon the material.
+
+❌ **You CANNOT**:
+- **Commercial Use**: You may not use the material for commercial purposes (selling the app, paid services) without explicit permission from the author.
+- **No Attribution**: You must give appropriate credit to the original author.
 
 ---
 
-## 🪩 Demo Preview
+## 📞 Contact & Credits
 
-![App Preview](public/drug-detect-preview.png)
+**Developed by [Manish Patil](https://github.com/manishpatil55)**.
 
-✨ A clean, glowing glassmorphic UI with smooth animations and orbs in the background.
-Type-safe, scroll-aware, and built with minimal JS for performance.
-
----
-
-🧑‍💻 Developer Notes
-   - You can customize the AI prompt in app.py to change how detailed responses should be.
-	- The entire app is front-end + Flask — no database required.
-	- The localStorage stores preview image data for smooth reload experience.
-	- Make sure .env is properly loaded before running the app.
+If you wish to use this software for commercial purposes or have feature requests, please contact the developer via GitHub Issues.
 
 ---
-
-
-📜 License
-
-This project is licensed under the **CC BY-NC 4.0** License — Open for learning/sharing, but strictly Non-Commercial.
-
----
-
-## 📬 Connect with Me
-
-Created by **Manish Patil**
-
-- 🐙 **GitHub**: [manishpatil55](https://github.com/manishpatil55)
-- 📧 **Email**: [Reach out via GitHub]
-- 💼 **LinkedIn**: [Add your link here]
-- 🐦 **X (Twitter)**: [Add your link here]
-
----
+<div align="center">
+  <sub>Built with ❤️ for a Healthier World.</sub>
+</div>
