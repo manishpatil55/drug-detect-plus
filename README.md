@@ -114,6 +114,17 @@ Type-safe, scroll-aware, and built with minimal JS for performance.
 
 📜 License
 
-This project is open-source under the MIT License — free to use, remix, and improve!
+This project is licensed under the **CC BY-NC 4.0** License — Open for learning/sharing, but strictly Non-Commercial.
+
+---
+
+## 📬 Connect with Me
+
+Created by **Manish Patil**
+
+- 🐙 **GitHub**: [manishpatil55](https://github.com/manishpatil55)
+- 📧 **Email**: [Reach out via GitHub]
+- 💼 **LinkedIn**: [Add your link here]
+- 🐦 **X (Twitter)**: [Add your link here]
 
 ---
